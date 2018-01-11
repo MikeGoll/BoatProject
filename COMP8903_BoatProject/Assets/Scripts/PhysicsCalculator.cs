@@ -19,32 +19,32 @@ public class PhysicsCalculator : MonoBehaviour {
 			4.Total Moment  of inertia
 	  */
 
-	  public float calculateCombined(float hull, float pilot, float cannon) {
+	  public static float calculateCombined(float hull, float pilot, float cannon) {
 		  return hull + pilot + cannon;
 	  }	  
 
-	  public float calculateMOI(float mass, float x, float z) {
+	  public static float calculateMOI(float mass, float x, float z) {
 		  const int divisor = 12;
 		  return (mass * (Mathf.Pow(x, 2) + Mathf.Pow(z, 2))) / divisor;
 	  }
 
-	  public float calculateRotationPoint(float x, float z, float comX, float comZ) {
+	  public static float calculateRotationPoint(float x, float z, float comX, float comZ) {
 		  return (Mathf.Pow(comX - x, 2) + Mathf.Pow(comZ - z, 2));
 	  }
 
-	  public float calculateComX(float bMass, float bx, float pMass, float px, float cMass, float cx, float comMass) {
+	  public static float calculateComX(float bMass, float bx, float pMass, float px, float cMass, float cx, float comMass) {
 		  return (((bMass * bx) + (pMass * px) + (cMass * cx)) / comMass);
 	  }
 
-	  public float calculateComZ(float bMass, float bz, float pMass, float pz, float cMass, float cz, float comMass) {
+	  public static float calculateComZ(float bMass, float bz, float pMass, float pz, float cMass, float cz, float comMass) {
 		  return (((bMass * bz) + (pMass * pz) + (cMass * cz)) / comMass);
 	  }
 
-	  public float calculateMH(float h, float mass) {
+	  public static float calculateMH(float h, float mass) {
 		  return h * mass;
 	  }
 
-	  public float calculateInertiaTotal(float x, float y) {
+	  public static float calculateInertiaTotal(float x, float y) {
 		  return x + y;
 	  }
 }
