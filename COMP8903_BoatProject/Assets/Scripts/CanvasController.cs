@@ -111,7 +111,7 @@ public class CanvasController : MonoBehaviour {
 		textH.text = "H: " + temp[2].ToString();
 		textMH.text = "MH: " + temp[3].ToString();
 		posXText.text = "X: " + temp[4];
-		posYText.text = "Y: " + temp[5];
+		posYText.text = "Z: " + temp[5];
 		dimText.text = temp[6] + "m , " + temp[7] + "m";
 		totInertia.text = "TI: " + temp[8];
 	}
