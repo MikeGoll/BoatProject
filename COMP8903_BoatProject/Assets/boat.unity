@@ -447,6 +447,7 @@ MonoBehaviour:
   h_boat: 0
   h_pilot: 0
   h_cannon: 0
+  comPoint: {fileID: 2100000, guid: c233c167ee974b6489e7ad3c51724933, type: 2}
 --- !u!1 &1005967492
 GameObject:
   m_ObjectHideFlags: 0

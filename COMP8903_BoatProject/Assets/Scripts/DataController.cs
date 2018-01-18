@@ -27,6 +27,8 @@ public class DataController : MonoBehaviour {
 
 	private int arraySize;
 
+	public Material comPoint;
+
 	// Use this for initialization
 	void Start () {
 		pilot = p.GetComponent<Pilot>();
@@ -62,6 +64,8 @@ public class DataController : MonoBehaviour {
 		calculateH();
 		calculateMH();
 		calculateInertiaTotals();
+
+		comPoint.SetVector("_COMPosition", new Vector3(comX, 0, comZ));
 	}
 
 	private void loadBoatFloats() {
