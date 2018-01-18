@@ -2,6 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: Cannon
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Initializes and stores all relevant data for the cannon object.
+----------------------------------------------------------------------------------------------------------------------*/
 public class Cannon : MonoBehaviour {
 
 	private float mass;
@@ -11,12 +23,34 @@ public class Cannon : MonoBehaviour {
 	private Vector3 position;
 	
 
-	// Use this for initialization
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: Start
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Initializes the mass of the cannon.
+----------------------------------------------------------------------------------------------------------------------*/
 	void Start () {
 		mass = 100;
 	}
 	
-	// Update is called once per frame
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: getX
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Updates the X and Z position as well as the x and z dimension.
+----------------------------------------------------------------------------------------------------------------------*/
 	void Update () {
 		x_position = transform.position.x;
 		z_position = transform.position.z;
@@ -24,22 +58,82 @@ public class Cannon : MonoBehaviour {
 		z_dimension = 2;
 	}
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: getX
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Returns the X value.
+----------------------------------------------------------------------------------------------------------------------*/
 	public float getX() {
 		return x_position;
 	}
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: getZ
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Returns the Z value.
+----------------------------------------------------------------------------------------------------------------------*/
 	public float getZ() {
 		return z_position;
 	}
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: getXDim
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Returns the X dimension value.
+----------------------------------------------------------------------------------------------------------------------*/
 	public float getXDim() {
 		return x_dimension;
 	}
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: getZDim
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Returns the Z dimension value.
+----------------------------------------------------------------------------------------------------------------------*/
 	public float getZDim() {
 		return z_dimension;
 	}
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: getMass
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Returns the mass value.
+----------------------------------------------------------------------------------------------------------------------*/
 	public float getMass() {
 		return mass;
 	}

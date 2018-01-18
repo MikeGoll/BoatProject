@@ -3,24 +3,64 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: CanvasController
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Controls the initializing, updating and input handling for the HUD's values.
+----------------------------------------------------------------------------------------------------------------------*/
 public class CanvasController : MonoBehaviour {
 
+	//Text references for updating
 	public Text textTitle, textMoi, textMass, textH, textMH, posXText, posYText, dimText, totInertia;
+	//canvas reference
 	public Canvas canvas;
+	//GameObject reference to the DataController object. Used to grab a reference to the DataController class.
 	public GameObject dco;
+	//DataController class reference. Used to obtain values to display.
 	private DataController dc;
+	//Float array of calculated values to display to the user.
 	private float[] values;
-
+	//boolean flag to represent whether or not the "COM" section is displayed and change the UI accordingly.
 	private bool showCom;
 
-	// Use this for initialization
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: Start
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Initializes the default text of the UI.
+-- Initializes the array of values to default calculated values.
+----------------------------------------------------------------------------------------------------------------------*/
 	void Start () {
 		textTitle.text = "Hull";
 		dc = dco.GetComponent<DataController>();
 		values = dc.getBoatFloats();
 	}
 	
-	// Update is called once per frame
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: Update
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Handles the user input and calls the UI to refresh its text.
+----------------------------------------------------------------------------------------------------------------------*/
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Alpha1)) {
 			showCom = false;
@@ -53,6 +93,18 @@ public class CanvasController : MonoBehaviour {
 		setText(values);
 	}
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: setText
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Updates the various text values with their appropriate values to display.
+----------------------------------------------------------------------------------------------------------------------*/
 	private void setText(float[] temp) {
 		textMass.text = "Mass: " + temp[0] + " kg";
 		textMoi.text = "MoI: " + temp[1].ToString();
@@ -62,6 +114,5 @@ public class CanvasController : MonoBehaviour {
 		posYText.text = "Y: " + temp[5];
 		dimText.text = temp[6] + "m , " + temp[7] + "m";
 		totInertia.text = "TI: " + temp[8];
-		
 	}
 }

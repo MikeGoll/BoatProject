@@ -2,13 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: DataController
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Controls the updating and distribution of data throughout the program.
+----------------------------------------------------------------------------------------------------------------------*/
 public class DataController : MonoBehaviour {
 
 	//GameObject references for the boat, pilot and cannon
 	public GameObject b, p, c;
+	//canvas object used to grab the CanvasController class
 	public Canvas canvas;
+	//canvas controller reference to call update methods
 	private CanvasController cController;
-
+	//data arrays that hold calculated values for various objects.
 	private float[] boatFloats, pilotFloats, cannonFloats, comFloats;
 	//masses of the objects
 	public float mass_boat, mass_pilot, mass_cannon, mass_com;
@@ -21,15 +35,31 @@ public class DataController : MonoBehaviour {
 	public float comX, comZ;
 	//h of the objects
 	public float h_boat, h_pilot, h_cannon;
+	//pilot object used to obtain pilot data
 	private Pilot pilot;
+	//pilot boat used to obtain boat data
 	private Boat boat;
+	//pilot boat used to obtain cannon data
 	private Cannon cannon;
-
+	//the size of the data arrays to update the HUD
 	private int arraySize;
-
+	//the material used to display the COM point
 	public Material comPoint;
 
-	// Use this for initialization
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: Start
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Initializes the various objects to call member functions.
+-- Initializes the canvas controller to update the HUD.
+-- Initializes the data arrays.
+----------------------------------------------------------------------------------------------------------------------*/
 	void Start () {
 		pilot = p.GetComponent<Pilot>();
 		boat = b.GetComponent<Boat>();
@@ -43,7 +73,20 @@ public class DataController : MonoBehaviour {
 		comFloats = new float[arraySize];
 	}
 	
-	// Update is called once per frame
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: Update
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Calls helper functions that calculate various attributes.
+-- Calls helper functions to load data arrays used to display the various attributes to the user.
+-- Updates the COM Point material to move the com point shader around.
+----------------------------------------------------------------------------------------------------------------------*/
 	void Update () {
 		mass_boat = boat.getMass();
 		mass_pilot = pilot.getMass();
@@ -68,6 +111,19 @@ public class DataController : MonoBehaviour {
 		comPoint.SetVector("_COMPosition", new Vector3(comX, 0, comZ));
 	}
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: loadBoatFloats
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Loads the data array for all the boat attributes that can change on the fly.
+-- Only updates the position of the boat and dimensions of the boat.
+----------------------------------------------------------------------------------------------------------------------*/
 	private void loadBoatFloats() {
 		boatFloats[4] = boat.getX();
 		boatFloats[5] = boat.getZ();
@@ -75,6 +131,19 @@ public class DataController : MonoBehaviour {
 		boatFloats[7] = boat.getZDim();
 	}
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: loadCannonFloats
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Loads the data array for all the cannon attributes that can change on the fly.
+-- Only updates the position of the cannon and dimensions of the boat.
+----------------------------------------------------------------------------------------------------------------------*/
 	private void loadCannonFloats() {
 		cannonFloats[4] = cannon.getX();
 		cannonFloats[5] = cannon.getZ();
@@ -82,6 +151,19 @@ public class DataController : MonoBehaviour {
 		cannonFloats[7] = cannon.getZDim();
 	}
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: loadPilotFloats
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Loads the data array for all the pilot attributes that can change on the fly.
+-- Only updates the position of the pilot and dimensions of the boat.
+----------------------------------------------------------------------------------------------------------------------*/
 	private void loadPilotFloats() {
 		pilotFloats[4] = pilot.getX();
 		pilotFloats[5] = pilot.getZ();
@@ -89,6 +171,19 @@ public class DataController : MonoBehaviour {
 		pilotFloats[7] = pilot.getZDim();
 	}
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: calculateMH
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Calls the physics helper function that calculates the moment of inertia for all the objects and 
+--     stores them in the appropriate data array.
+----------------------------------------------------------------------------------------------------------------------*/
 	private void calculateMomentOfInertia() {
 		moi_boat = PhysicsCalculator.calculateMOI(boat.getMass(), boat.getXDim(), boat.getZDim());
 		moi_pilot = PhysicsCalculator.calculateMOI(pilot.getMass(), pilot.getXDim(), pilot.getZDim());
@@ -101,6 +196,19 @@ public class DataController : MonoBehaviour {
 		comFloats[1] = moi_com;
 	}
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: calculateComValues
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Calls the physics helper function that calculates the center of mass the whole object and 
+--     stores them in the appropriate data array.
+----------------------------------------------------------------------------------------------------------------------*/
 	private void calculateComValues() {
 		comX = PhysicsCalculator.calculateComX(mass_boat, boat.getX(), mass_pilot, pilot.getX(), mass_cannon, cannon.getX(), mass_com);
 		comZ = PhysicsCalculator.calculateComZ(mass_boat, boat.getZ(), mass_pilot, pilot.getZ(), mass_cannon, cannon.getZ(), mass_com);
@@ -109,6 +217,19 @@ public class DataController : MonoBehaviour {
 		comFloats[5] = comZ;
 	}
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: calculateH
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Calls the physics helper function that calculates the H values for all the objects and 
+--     stores them in the appropriate data array.
+----------------------------------------------------------------------------------------------------------------------*/
 	private void calculateH() {
 		h_boat = PhysicsCalculator.calculateRotationPoint(boat.getX(), boat.getZ(), comX, comZ);
 		h_pilot = PhysicsCalculator.calculateRotationPoint(pilot.getX(), pilot.getZ(), comX, comZ);
@@ -119,6 +240,19 @@ public class DataController : MonoBehaviour {
 		cannonFloats[2] = h_cannon;
 	}
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: calculateMH
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Calls the physics helper function that calculates the MH values for all the objects and 
+--     stores them in the appropriate data array.
+----------------------------------------------------------------------------------------------------------------------*/
 	private void calculateMH() {
 		mh_boat = PhysicsCalculator.calculateMH(h_boat, mass_boat);
 		mh_pilot = PhysicsCalculator.calculateMH(h_pilot, mass_pilot);
@@ -131,6 +265,19 @@ public class DataController : MonoBehaviour {
 		comFloats[3] = mh_com;
 	}
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: calculateInertiaTotals
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Calls the physics helper function that calculates the inertia totals for all the objects and 
+--     stores them in the appropriate data array.
+----------------------------------------------------------------------------------------------------------------------*/
 	private void calculateInertiaTotals() {
 		it_boat = PhysicsCalculator.calculateInertiaTotal(moi_boat, mh_boat);
 		it_pilot = PhysicsCalculator.calculateInertiaTotal(moi_pilot, mh_pilot);
@@ -143,18 +290,70 @@ public class DataController : MonoBehaviour {
 		comFloats[8] = it_com;
 	}
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: getPilotFloats
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Returns the boat float values in an array.
+-- Used by the CanvasController to retrieve updated values
+----------------------------------------------------------------------------------------------------------------------*/
 	public float[] getBoatFloats() {
 		return boatFloats;
 	}
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: getPilotFloats
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Returns the pilot float values in an array.
+-- Used by the CanvasController to retrieve updated values
+----------------------------------------------------------------------------------------------------------------------*/
 	public float[] getPilotFloats() {
 		return pilotFloats;
 	}
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: getCannonFloats
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Returns the cannon float values in an array.
+-- Used by the CanvasController to retrieve updated values
+----------------------------------------------------------------------------------------------------------------------*/
 	public float[] getCannonFloats() {
 		return cannonFloats;
 	}
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: getComFloats
+--
+-- DATE: January 11, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Returns the com float values in an array.
+-- Used by the CanvasController to retrieve updated values
+----------------------------------------------------------------------------------------------------------------------*/
 	public float[] getComFloats() {
 		return comFloats;
 	}
