@@ -151,4 +151,24 @@ public class PhysicsCalculator : MonoBehaviour {
 	  public static float calculateInertiaTotal(float x, float y) {
 		  return x + y;
 	  }
+
+	  public static float calculateDistance(float si, float a, float init_velocity, float time) {
+		  return si + (init_velocity * time) + (0.5f * a * Mathf.Pow(time, 2));
+	  }
+
+	  public static float calculateVelocity(float vi, float a, float time) {
+		  return (vi + (a * time));
+	  }
+
+	  public static float calculateDistanceDrag(float si, float a, float vi, float time, float k) {
+		  return si + Mathf.Log(1 + k * vi * time) / k;
+	  }
+
+	  public static float calculateVelocityDrag(float vi, float a, float time, float k) {
+		  return vi / (1 + k * vi * time);
+	  }
+
+	  public static float calculateDragConstant(float a, float v) {
+		  return -a / Mathf.Pow(v, 2);
+	  }
 }
