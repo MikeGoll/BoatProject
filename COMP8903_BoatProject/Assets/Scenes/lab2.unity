@@ -215,6 +215,7 @@ GameObject:
   m_Component:
   - component: {fileID: 597235000}
   - component: {fileID: 597235001}
+  - component: {fileID: 597235002}
   m_Layer: 0
   m_Name: 'PhysicsSystem '
   m_TagString: Untagged
@@ -247,6 +248,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   marker: {fileID: 1505640036155792, guid: 17b800076e3914bbab32aa863a285f5f, type: 2}
+--- !u!114 &597235002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 597234999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec2c388953d4c4a2597c56beca8b30dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 0
+  velocity: 16
+  acceleration: -4
+  dragConstant: 0
+  time: 3
+  useDrag: 1
+  boat: {fileID: 1121528866}
 --- !u!1001 &1095083635
 Prefab:
   m_ObjectHideFlags: 0
@@ -293,6 +312,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6c0f77bc49853406f9ee496bd25b3b54, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1121528866 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1370987886279916, guid: 74d370ff7ef714fdeb5df81e9840d4cd,
+    type: 2}
+  m_PrefabInternal: {fileID: 1184437613}
 --- !u!1 &1170600418
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,6 +441,11 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 0.03
       objectReference: {fileID: 0}
+    - target: {fileID: 23197070367361830, guid: 74d370ff7ef714fdeb5df81e9840d4cd,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 253f38d9e94062f468ebcc03a534b3b9, type: 2}
     m_RemovedComponents:
     - {fileID: 114119392378996886, guid: 74d370ff7ef714fdeb5df81e9840d4cd, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 74d370ff7ef714fdeb5df81e9840d4cd, type: 2}
