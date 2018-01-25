@@ -16,6 +16,8 @@ using UnityEngine;
 ----------------------------------------------------------------------------------------------------------------------*/
 public class PhysicsCalculator : MonoBehaviour {
 
+	private const float EXP = 2.71828182845904f;
+
 	/*
 		Hull	500	4	8	0	0	3.33E+03	0.2653810836  1.33E+02	3.47E+03
 		Gun	    100	1	2	0	-4	4.17E+01	12.14416896	  1.21E+03	1.26E+03
@@ -161,14 +163,18 @@ public class PhysicsCalculator : MonoBehaviour {
 	  }
 
 	  public static float calculateDistanceDrag(float si, float a, float vi, float time, float k) {
-		  return si + Mathf.Log(1 + k * vi * time) / k;
+		  return si + Mathf.Log(1f + k * vi * time) / k;
 	  }
 
 	  public static float calculateVelocityDrag(float vi, float a, float time, float k) {
-		  return vi / (1 + k * vi * time);
+		  return vi / (1f + k * vi * time);
 	  }
 
 	  public static float calculateDragConstant(float a, float v) {
 		  return -a / Mathf.Pow(v, 2);
+	  }
+
+	  public static float calculateDragTime(float damped, float distance, float velocity) {
+		  return ((Mathf.Pow(EXP, damped * distance) - 1f) / damped) / velocity;
 	  }
 }

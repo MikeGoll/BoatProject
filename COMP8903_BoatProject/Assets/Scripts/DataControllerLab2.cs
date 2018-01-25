@@ -1,22 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DataControllerLab2 : MonoBehaviour {
 
-	private int numUpdates;
+	public int numUpdates;
 
 	public float distance, velocity, acceleration, dragConstant, time;
 	public bool useDrag;
 
 	private bool moving;
 
-	private float startTime, totalTime;
-	private float newD, currentD, newV, oldV;
+	private float startTime, totalTime, t;
+	private float newD, currentD, newV, oldV, dt;
 
 	public GameObject boat;
 
 	private bool timeLogged;
+
+	public Text timeText, frameText, velocityText, distanceText;
 
 	// Use this for initialization
 	void Start () {
@@ -25,7 +28,7 @@ public class DataControllerLab2 : MonoBehaviour {
 		currentD = 0;
 		oldV = velocity;
 
-		startTime = Time.time;
+		startTime = time / Time.deltaTime;
 		moving = true;
 		timeLogged = false;
 
@@ -34,40 +37,44 @@ public class DataControllerLab2 : MonoBehaviour {
 		}
 
 		distance = PhysicsCalculator.calculateDistance(0, acceleration, velocity, time);
+		dt = PhysicsCalculator.calculateDragTime(dragConstant, distance, velocity);
 	}
 
 	void FixedUpdate() {
-		numUpdates++;
+		
+		t = numUpdates * Time.deltaTime;
 
 		if (moving) {
 			if (useDrag) {
-				//float si, float a, float init_velocity, float time, float k
 				newD = PhysicsCalculator.calculateDistanceDrag(currentD, acceleration, oldV, Time.fixedDeltaTime, dragConstant);
-				//float vi, float a, float time, float k
 				newV = PhysicsCalculator.calculateVelocityDrag(oldV, acceleration, Time.fixedDeltaTime, dragConstant);
+
+				if (t >= dt) {
+					moving = false;
+				}
+
 			} else {
-				//float si, float a, float init_velocity, float time
 				newD = PhysicsCalculator.calculateDistance(currentD, acceleration, oldV, Time.fixedDeltaTime);
 				newV = PhysicsCalculator.calculateVelocity(oldV, acceleration, Time.fixedDeltaTime);
+
+				if (t >= time) {
+					moving = false;
+				}
 			}
+
+			timeText.text = "Time: " + t + " seconds";
+			frameText.text = "Frame: " + numUpdates + " frames";
+			velocityText.text = "Velocity: " + oldV + " m/s";
+			distanceText.text = "Distance: " + currentD + " m";
 		}
 
-		if (oldV <= 0 || currentD >= distance) {
-			moving = false;
-		}
-
-		currentD = newD;
-		oldV = newV;
-
+		//need to recheck if moving before going to next frame.
+		//moving could be changed to false before it reaches here so need to recheck.
 		if (moving) {
 			boat.transform.Translate(Vector3.forward * oldV * Time.deltaTime);
-		} else {
-			if (!timeLogged) {
-				timeLogged = true;
-				totalTime = Time.timeSinceLevelLoad - startTime;
-				Debug.Log("Total Time: " + totalTime + " seconds.");
-				Debug.Log("Total Updates: " + numUpdates + " updates.");
-			}
+			currentD = newD;
+			oldV = newV;
+			numUpdates++;
 		}
 	}
 }
