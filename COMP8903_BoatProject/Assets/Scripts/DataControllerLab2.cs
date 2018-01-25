@@ -12,12 +12,10 @@ public class DataControllerLab2 : MonoBehaviour {
 
 	private bool moving;
 
-	private float startTime, totalTime, t;
+	private float totalTime, t;
 	private float newD, currentD, newV, oldV, dt;
 
 	public GameObject boat;
-
-	private bool timeLogged;
 
 	public Text timeText, frameText, velocityText, distanceText;
 
@@ -27,10 +25,7 @@ public class DataControllerLab2 : MonoBehaviour {
 		
 		currentD = 0;
 		oldV = velocity;
-
-		startTime = time / Time.deltaTime;
 		moving = true;
-		timeLogged = false;
 
 		if (useDrag) {
 			dragConstant = PhysicsCalculator.calculateDragConstant(acceleration, velocity);
@@ -42,11 +37,12 @@ public class DataControllerLab2 : MonoBehaviour {
 
 	void FixedUpdate() {
 		
+		//calculate what frame it is
 		t = numUpdates * Time.deltaTime;
 
 		if (moving) {
 			if (useDrag) {
-				newD = PhysicsCalculator.calculateDistanceDrag(currentD, acceleration, oldV, Time.fixedDeltaTime, dragConstant);
+				newD = PhysicsCalculator.calculateDistanceDrag(currentD, oldV, Time.fixedDeltaTime, dragConstant);
 				newV = PhysicsCalculator.calculateVelocityDrag(oldV, acceleration, Time.fixedDeltaTime, dragConstant);
 
 				if (t >= dt) {

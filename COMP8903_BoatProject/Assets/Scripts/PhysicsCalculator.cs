@@ -16,6 +16,7 @@ using UnityEngine;
 ----------------------------------------------------------------------------------------------------------------------*/
 public class PhysicsCalculator : MonoBehaviour {
 
+	//EXP constant for lab #2
 	private const float EXP = 2.71828182845904f;
 
 	/*
@@ -32,6 +33,8 @@ public class PhysicsCalculator : MonoBehaviour {
 			3.Moment  of Inertia, 2h, 2Mh for Hull, Pilot, Gun
 			4.Total Moment  of inertia
 	  */
+
+// ------------------------------------------------- LAB #1 -------------------------------------------------
 
 /*------------------------------------------------------------------------------------------------------------------
 -- FUNCTION: calculateCombined
@@ -154,27 +157,104 @@ public class PhysicsCalculator : MonoBehaviour {
 		  return x + y;
 	  }
 
+// ------------------------------------------------- LAB #2 -------------------------------------------------
+
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: calculateDistance
+--
+-- DATE: January 23, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Calculates the distance for the uniform-acceleration case.
+----------------------------------------------------------------------------------------------------------------------*/
 	  public static float calculateDistance(float si, float a, float init_velocity, float time) {
 		  return si + (init_velocity * time) + (0.5f * a * Mathf.Pow(time, 2));
 	  }
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: calculateVelocity
+--
+-- DATE: January 23, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Calculates the velocity for the uniform-acceleration case.
+----------------------------------------------------------------------------------------------------------------------*/
 	  public static float calculateVelocity(float vi, float a, float time) {
 		  return (vi + (a * time));
 	  }
 
-	  public static float calculateDistanceDrag(float si, float a, float vi, float time, float k) {
-		  return si + Mathf.Log(1f + k * vi * time) / k;
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: calculateDistanceDrag
+--
+-- DATE: January 23, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Calculates the velocity for the non-uniform acceleration case.
+----------------------------------------------------------------------------------------------------------------------*/
+	  public static float calculateDistanceDrag(float si, float vi, float time, float k) {
+		  return si + ((Mathf.Log(1f + k * vi * time)) / k);
 	  }
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: calculateVelocityDrag
+--
+-- DATE: January 23, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Calculates the drag velocity for the non-uniform acceleration case.
+----------------------------------------------------------------------------------------------------------------------*/
 	  public static float calculateVelocityDrag(float vi, float a, float time, float k) {
 		  return vi / (1f + k * vi * time);
 	  }
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: calculateDragConstant
+--
+-- DATE: January 23, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Calculates the drag constant for the non-uniform acceleration case.
+----------------------------------------------------------------------------------------------------------------------*/
 	  public static float calculateDragConstant(float a, float v) {
 		  return -a / Mathf.Pow(v, 2);
 	  }
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: calculateDragTime
+--
+-- DATE: January 24, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Calculates the drag time for the non-uniform acceleration case.
+----------------------------------------------------------------------------------------------------------------------*/
 	  public static float calculateDragTime(float damped, float distance, float velocity) {
 		  return ((Mathf.Pow(EXP, damped * distance) - 1f) / damped) / velocity;
 	  }
+
+
+// ------------------------------------------------- LAB #3 -------------------------------------------------
 }
