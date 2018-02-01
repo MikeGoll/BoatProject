@@ -20,6 +20,7 @@ using UnityEngine.UI;
 public class Spawner : MonoBehaviour {
 
 	public GameObject marker;
+	public static GameObject gunball;
 	private const int MARKERNUM = 38;
 	private const int SPACER = -2;
 
@@ -28,5 +29,9 @@ public class Spawner : MonoBehaviour {
 			GameObject temp = Object.Instantiate(marker, new Vector3(SPACER, 0, x), Quaternion.identity);
 			temp.GetComponentInChildren<TextMesh>().text = "" + x;
 		}
+	}
+
+	public static void spawnGunball(int x, int y, int z) {
+		Object.Instantiate(gunball, new Vector3(x, y, z), Quaternion.identity);
 	}
 }
