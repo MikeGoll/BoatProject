@@ -20,8 +20,6 @@ public class DataController : MonoBehaviour {
 	public GameObject b, p, c;
 	//canvas object used to grab the CanvasController class
 	public Canvas canvas;
-	//canvas controller reference to call update methods
-	private CanvasController cController;
 	//data arrays that hold calculated values for various objects.
 	private float[] boatFloats, pilotFloats, cannonFloats, comFloats;
 	//masses of the objects
@@ -64,7 +62,6 @@ public class DataController : MonoBehaviour {
 		pilot = p.GetComponent<Pilot>();
 		boat = b.GetComponent<Boat>();
 		cannon = c.GetComponent<Cannon>();
-		cController = canvas.GetComponent<CanvasController>();
 		arraySize = 9;
 
 		boatFloats = new float[arraySize];
