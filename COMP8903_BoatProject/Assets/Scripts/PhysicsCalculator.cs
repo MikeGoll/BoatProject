@@ -281,5 +281,7 @@ public class PhysicsCalculator : MonoBehaviour {
 		return Mathf.Sin((theta * Mathf.PI) / 180) * velocity;
 	}
 
-
+	public static float calculateFinalVelocityY(float y, float angle) {
+		return Mathf.Pow(y, 2) * Mathf.Sin(1);
+	}
 }

@@ -1,20 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DataControllerLab3 : MonoBehaviour {
 
 	
-	public GameObject boat, target, gunball;
+	public GameObject boat, target, gunball, flightMarker;
 	public float gunBallVelocity;
 	public float range;
 	public float angle;
-
-	private bool moving;
-	public float totalTime, t;
 	public float newDx, newDy, currentDx, currentDy, newVx, newVy, oldVx, oldVy;
+	public Text initialVelText, updatesText, timeText, rangeText;
+
+	private bool moving, initial;
+	private float totalTime, t;
 	private float numUpdates;
+	private float lastMarker, buffer;
 	private bool gunBallSpawned;
+	private float yDisplacement, zDisplacement;
+	private float timeBeg;
 
 	private const float ACCELERATION = -9.81f;
 
@@ -24,6 +29,9 @@ public class DataControllerLab3 : MonoBehaviour {
 		range = PhysicsCalculator.calculateRange(boat, target);
 		moving = true;
 		gunBallSpawned = false;
+		initial = true;
+		lastMarker = numUpdates;
+		buffer = 3;
 
 		//calculate theta
 		angle = PhysicsCalculator.calculateTheta(range, gunBallVelocity);
@@ -56,6 +64,12 @@ public class DataControllerLab3 : MonoBehaviour {
 
 	void FixedUpdate() {
 		if (moving && gunBallSpawned) {
+
+			if (initial) {
+				initial = false;
+				timeBeg = Time.time;
+			}
+
 			//calculate what frame it is
 			t = numUpdates * Time.fixedDeltaTime;
 
@@ -68,23 +82,28 @@ public class DataControllerLab3 : MonoBehaviour {
 			newDx = PhysicsCalculator.calculateDistance(currentDx, 0, newVx, Time.fixedDeltaTime);
 			newDy = PhysicsCalculator.calculateDistance(currentDy, ACCELERATION, newVy, Time.fixedDeltaTime);
 
-			Debug.Log("DisplacementX: " + newVx * Time.fixedDeltaTime);
-			Debug.Log("DisplacementY: " + newVy * Time.fixedDeltaTime);
-			
-
-			//if gunball location < 0.05 to target
-			//moving = false;
-
 			if (gunball.transform.position.y - target.transform.position.y <= 0.05 && numUpdates > 0) {
 				moving = false;
-				Debug.Log("Delta: " + t);
+				timeText.text = "Time: " + totalTime + " seconds";
 			} else {
-				gunball.transform.position = new Vector3(gunball.transform.position.x, gunball.transform.position.y + newVy * Time.fixedDeltaTime, gunball.transform.position.z + newVx * Time.fixedDeltaTime);
+				yDisplacement = newVy * Time.fixedDeltaTime;
+				zDisplacement = newVx * Time.fixedDeltaTime;
+				gunball.transform.position = new Vector3(gunball.transform.position.x, gunball.transform.position.y + yDisplacement, gunball.transform.position.z + zDisplacement);
+
+				if (lastMarker + buffer < numUpdates) {
+					lastMarker = numUpdates;
+					Object.Instantiate(flightMarker, new Vector3(gunball.transform.position.x, gunball.transform.position.y + yDisplacement, gunball.transform.position.z + zDisplacement), Quaternion.identity);
+				}
 			}
 		}
 
 		if (moving && gunBallSpawned) {
 			//update UI
+			initialVelText.text = "Init. Velocity: " + gunBallVelocity + " m/s";
+			rangeText.text = "Range: " + range + " m";
+			timeText.text = "Time: " + (Time.time - timeBeg) + " seconds";
+			updatesText.text = "Updates: " + (numUpdates + 1) + " frames";
+
 			numUpdates++;
 			oldVx = newVx;
 			oldVy = newVy;
