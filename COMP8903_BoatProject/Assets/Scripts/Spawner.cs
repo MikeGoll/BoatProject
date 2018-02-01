@@ -26,12 +26,8 @@ public class Spawner : MonoBehaviour {
 
 	void Start () {
 		for (int x = -4; x < MARKERNUM; x++) {
-			GameObject temp = Object.Instantiate(marker, new Vector3(SPACER, 0, x), Quaternion.identity);
+			GameObject temp = Object.Instantiate(marker, new Vector3(SPACER, 0, x), Quaternion.Euler(0, -90, 0));
 			temp.GetComponentInChildren<TextMesh>().text = "" + x;
 		}
-	}
-
-	public static void spawnGunball(int x, int y, int z) {
-		Object.Instantiate(gunball, new Vector3(x, y, z), Quaternion.identity);
 	}
 }

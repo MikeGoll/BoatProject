@@ -18,6 +18,7 @@ public class PhysicsCalculator : MonoBehaviour {
 
 	//EXP constant for lab #2
 	private const float EXP = 2.71828182845904f;
+	
 	//Acceleration due to gravity for lab #3
 	private const float GRAVITY = 9.81f;
 
@@ -260,28 +261,85 @@ public class PhysicsCalculator : MonoBehaviour {
 
 // ------------------------------------------------- LAB #3 -------------------------------------------------
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: calculateRange
+--
+-- DATE: January 31, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Calculates the range between the middle of the cannon and the middle of the target.
+----------------------------------------------------------------------------------------------------------------------*/
 	public static float calculateRange(GameObject boat, GameObject target) {
 		return (target.transform.position.z - boat.transform.position.z);
 	}
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: calculateProjTime
+--
+-- DATE: January 31, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Calculates the projectile's total time to hit the target.
+----------------------------------------------------------------------------------------------------------------------*/
 	public static float calculateProjTime(float distance, float v, float cos) {
 		return distance / (v * Mathf.Cos(cos));
 	}
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: calculateTheta
+--
+-- DATE: January 31, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Calculates the angle that the cannon will have to fire at to hit the target.
+-- Returns the answer in radians.
+----------------------------------------------------------------------------------------------------------------------*/
 	//returns the theta value in radians
 	public static float calculateTheta(float distance, float v) {
 		return (Mathf.Asin((GRAVITY * distance) / Mathf.Pow(v, 2))) / 2;
 	}
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: calculateXVelocity
+--
+-- DATE: January 31, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Calculates the X velocity component given the total velocity and angle.
+----------------------------------------------------------------------------------------------------------------------*/
 	public static float calculateXVelocity(float velocity, float theta) {
 		return Mathf.Cos((theta * Mathf.PI) / 180) * velocity;
 	}
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: calculateYVelocity
+--
+-- DATE: January 31, 2018
+--
+-- DESIGNER:   Michael Goll
+--
+-- PROGRAMMER: Michael Goll
+--
+-- NOTES:
+-- Calculates the Y velocity component given the total velocity and angle.
+----------------------------------------------------------------------------------------------------------------------*/
 	public static float calculateYVelocity(float velocity, float theta) {
 		return Mathf.Sin((theta * Mathf.PI) / 180) * velocity;
-	}
-
-	public static float calculateFinalVelocityY(float y, float angle) {
-		return Mathf.Pow(y, 2) * Mathf.Sin(1);
 	}
 }
