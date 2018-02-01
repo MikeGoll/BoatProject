@@ -22,7 +22,7 @@ public class Spawner : MonoBehaviour {
 	public GameObject marker;
 	public static GameObject gunball;
 	private const int MARKERNUM = 38;
-	private const int SPACER = -2;
+	private const int SPACER = -3;
 
 	void Start () {
 		for (int x = -4; x < MARKERNUM; x++) {
