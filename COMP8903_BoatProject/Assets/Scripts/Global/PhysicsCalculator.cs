@@ -274,7 +274,7 @@ public class PhysicsCalculator : MonoBehaviour {
 -- Calculates the range between the middle of the cannon and the middle of the target.
 ----------------------------------------------------------------------------------------------------------------------*/
 	public static float calculateRange(GameObject boat, GameObject target) {
-		return (target.transform.position.z - boat.transform.position.z);
+		return Mathf.Abs((target.transform.position.z - boat.transform.position.z));
 	}
 
 /*------------------------------------------------------------------------------------------------------------------
@@ -350,7 +350,7 @@ public class PhysicsCalculator : MonoBehaviour {
 	}
 
 	public static float calculateXDifference(GameObject boat, GameObject target) {
-		return (target.transform.position.x - boat.transform.position.x);
+		return Mathf.Abs((target.transform.position.x - boat.transform.position.x));
 	}
 
 	public static float calculateAngle(float g, float xDifference, float zDifference, float vi) {

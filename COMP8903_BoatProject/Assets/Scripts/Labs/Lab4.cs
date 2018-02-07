@@ -11,7 +11,7 @@ public GameObject boat, target, gunball, flightMarker;
 	public float angle, angleAdjusted;
 	public float newDx, newDy, newDz, newVx, newVy, newVz;
 	public float currentDx, currentDy, oldDz, oldVx, oldVy, oldVz;
-	// public Text initialVelText, updatesText, timeText, rangeText, angleText, gunBallText;
+	public Text updatesText, timeText, gammaText, angleText;
 
 	private bool moving, initial;
 	private float totalTime, fixedTime;
@@ -112,7 +112,7 @@ public GameObject boat, target, gunball, flightMarker;
 
 				if (gunball.transform.position.y - target.transform.position.y <= 0.05 && numUpdates > 0) {
 					moving = false;
-					// timeText.text = "Time: " + totalTime + " seconds";
+					timeText.text = "Time: " + ((numUpdates + 1) * fixedTime) + " seconds";
 				} else {
 					yDisplacement = newVy * fixedTime;
 					zDisplacement = newVx * fixedTime;
@@ -126,8 +126,7 @@ public GameObject boat, target, gunball, flightMarker;
 			} else {
 				if (gunball.transform.position.y - target.transform.position.y <= 0.05 && numUpdates > 0) {
 					moving = false;
-					// timeText.text = "Time: " + totalTime + " seconds";
-					Debug.Log(numUpdates);
+					timeText.text = "Time: " + ((numUpdates + 1) * fixedTime) + " seconds";
 				} else {
 					//run lab 4
 					newVx = PhysicsCalculator.calculateVelocity(oldVx, 0, fixedTime);
@@ -139,19 +138,25 @@ public GameObject boat, target, gunball, flightMarker;
 					newDz = PhysicsCalculator.calculateZPosition(oldDz, oldVz, angleAdjusted * Mathf.PI / 180, PhysicsCalculator.toDegrees(gamma), fixedTime);
 
 					gunball.transform.position = new Vector3(gunball.transform.position.x + newVx * fixedTime, gunball.transform.position.y + newVy * fixedTime, gunball.transform.position.z + newVz * fixedTime);
+
+					if (lastMarker + buffer < numUpdates) {
+						lastMarker = numUpdates;
+						Object.Instantiate(flightMarker, new Vector3(gunball.transform.position.x, gunball.transform.position.y + yDisplacement, gunball.transform.position.z + zDisplacement), Quaternion.identity);
+					}
 				}
 			}
 		}
 
 		if (moving && gunBallSpawned) {
-			//update UI
-			// initialVelText.text = "Init. Velocity: " + gunBallVelocity + " m/s";
-			// rangeText.text = "Range: " + range + " m";
-			// timeText.text = "Time: " + (Time.time - timeBeg) + " seconds";
-			// updatesText.text = "Updates: " + (numUpdates + 1) + " frames";
-			// gunBallText.text = "Gunball Z: " + gunball.transform.position.z + " m";
-
 			numUpdates++;
+
+			//update UI
+			gammaText.text = "Gamma: " + gamma;
+			angleText.text = "Alpha: " + angle;
+			timeText.text = "Time: " + ((numUpdates + 1) * fixedTime) + " seconds";
+			updatesText.text = "Updates: " + (numUpdates + 1) + " frames";
+			
+			
 			oldVx = newVx;
 			oldVy = newVy;
 			oldVz = newVz;

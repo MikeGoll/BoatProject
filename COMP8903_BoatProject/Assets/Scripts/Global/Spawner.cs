@@ -21,12 +21,17 @@ public class Spawner : MonoBehaviour {
 
 	public GameObject marker;
 	public static GameObject gunball;
-	private const int MARKERNUM = 38;
+	private const int MARKERNUM = 25;
 	private const int SPACER = -3;
 
 	void Start () {
-		for (int x = -4; x < MARKERNUM; x++) {
+		for (int x = -5; x < MARKERNUM; x++) {
 			GameObject temp = Object.Instantiate(marker, new Vector3(SPACER, 0, x), Quaternion.Euler(0, -90, 0));
+			temp.GetComponentInChildren<TextMesh>().text = "" + x;
+		}
+
+		for (int x = -MARKERNUM; x < MARKERNUM; x++) {
+			GameObject temp = Object.Instantiate(marker, new Vector3(x, 0, 0), Quaternion.Euler(0, 0, 0));
 			temp.GetComponentInChildren<TextMesh>().text = "" + x;
 		}
 	}
