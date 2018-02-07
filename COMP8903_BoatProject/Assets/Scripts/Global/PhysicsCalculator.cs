@@ -342,4 +342,46 @@ public class PhysicsCalculator : MonoBehaviour {
 	public static float calculateYVelocity(float velocity, float theta) {
 		return Mathf.Sin((theta * Mathf.PI) / 180) * velocity;
 	}
+
+// ------------------------------------------------- LAB #4 -------------------------------------------------
+
+	public static float toDegrees(float rads) {
+		return (rads * 180) / Mathf.PI;
+	}
+
+	public static float calculateXDifference(GameObject boat, GameObject target) {
+		return (target.transform.position.x - boat.transform.position.x);
+	}
+
+	public static float calculateAngle(float g, float xDifference, float zDifference, float vi) {
+		return (Mathf.Asin(Mathf.Abs(g) * (Mathf.Sqrt(Mathf.Pow(xDifference, 2) + Mathf.Pow(zDifference, 2))) / Mathf.Pow(vi, 2)));
+	}
+
+	public static float calculateGamma(float xDifference, float zDifference) {
+		return (Mathf.Asin(xDifference / Mathf.Sqrt((Mathf.Pow(zDifference, 2) + Mathf.Pow(xDifference, 2)))));
+	}
+
+	public static float calculateXPosition(float xi, float xvi, float alpha, float gamma, float t) {
+		return (xi + (xvi * Mathf.Sin(alpha) * Mathf.Sin(gamma) * t));
+	}
+
+	public static float calculateZPosition(float zi, float zvi, float alpha, float gamma, float t) {
+		return (zi + (zvi * Mathf.Sin(alpha) * Mathf.Cos(gamma) * t));
+	}
+
+	public static float calculateGammaVelocity(float speed, float gamma, float alpha) {
+		return (speed * gamma * alpha);
+	}
+
+	public static float calculateGammaYVelocity(float speed, float alpha) {
+		return (speed * Mathf.Cos(alpha * Mathf.PI / 180));
+	}
+
+	public static float calculateYVelocityGamma(float vi, float g, float t) {
+		return (vi - g * t);
+	}
+
+	public static float calculateYPosition(float yi, float vi, float g, float t) {
+		return (yi + (vi * t) - (0.5f * g * Mathf.Pow(t, 2)));
+	}
 }
