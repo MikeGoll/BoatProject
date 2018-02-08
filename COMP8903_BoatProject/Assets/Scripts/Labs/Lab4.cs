@@ -116,7 +116,14 @@ public GameObject boat, target, gunball, flightMarker;
 				} else {
 					yDisplacement = newVy * fixedTime;
 					zDisplacement = newVx * fixedTime;
-					gunball.transform.position = new Vector3(gunball.transform.position.x, gunball.transform.position.y + yDisplacement, gunball.transform.position.z + zDisplacement);
+
+					if (target.transform.position.z < boat.transform.position.z) {
+						gunball.transform.position = new Vector3(gunball.transform.position.x, gunball.transform.position.y + yDisplacement, gunball.transform.position.z - zDisplacement);
+					} else {
+						gunball.transform.position = new Vector3(gunball.transform.position.x, gunball.transform.position.y + yDisplacement, gunball.transform.position.z + zDisplacement);
+					}
+
+					
 
 					if (lastMarker + buffer < numUpdates) {
 						lastMarker = numUpdates;
@@ -137,7 +144,17 @@ public GameObject boat, target, gunball, flightMarker;
 					newDy = PhysicsCalculator.calculateYPosition(currentDy, oldVy, -ACCELERATION, fixedTime);
 					newDz = PhysicsCalculator.calculateZPosition(oldDz, oldVz, angleAdjusted * Mathf.PI / 180, PhysicsCalculator.toDegrees(gamma), fixedTime);
 
-					gunball.transform.position = new Vector3(gunball.transform.position.x + newVx * fixedTime, gunball.transform.position.y + newVy * fixedTime, gunball.transform.position.z + newVz * fixedTime);
+					if (target.transform.position.x < boat.transform.position.x && target.transform.position.z < boat.transform.position.z) {
+						 gunball.transform.position = new Vector3(gunball.transform.position.x - newVx * fixedTime, gunball.transform.position.y + newVy * fixedTime, gunball.transform.position.z - newVz * fixedTime);
+					} else if (target.transform.position.x < boat.transform.position.x) {
+						Debug.Log("lol, here");
+						gunball.transform.position = new Vector3(gunball.transform.position.x - newVx * fixedTime, gunball.transform.position.y + newVy * fixedTime, gunball.transform.position.z + newVz * fixedTime);
+					} else if (target.transform.position.z < boat.transform.position.z) {
+						gunball.transform.position = new Vector3(gunball.transform.position.x + newVx * fixedTime, gunball.transform.position.y + newVy * fixedTime, gunball.transform.position.z - newVz * fixedTime);
+					} else {
+						gunball.transform.position = new Vector3(gunball.transform.position.x + newVx * fixedTime, gunball.transform.position.y + newVy * fixedTime, gunball.transform.position.z + newVz * fixedTime);
+					}
+					
 
 					if (lastMarker + buffer < numUpdates) {
 						lastMarker = numUpdates;
