@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Lab4 : MonoBehaviour {
+public class Lab5 : MonoBehaviour {
 
+	// Use this for initialization
 	public GameObject boat, target, gunball, flightMarker;
 	public float gunBallVelocity;
-	public float range, xDifference, gamma, gammaDegrees;
-	public float angle, angleAdjusted;
-	public float newDx, newDy, newDz, newVx, newVy, newVz;
-	public float currentDx, currentDy, oldDz, oldVx, oldVy, oldVz;
+	public float omegaI, omegaF, alphaI, theta, angularDisplacement, totalAngleDisplacement;
+	public float range, xDifference;
 	public Text updatesText, timeText, gammaText, angleText;
 
 	private bool moving, initial;
@@ -19,6 +18,12 @@ public class Lab4 : MonoBehaviour {
 	private float lastMarker, buffer;
 	private bool gunBallSpawned;
 	private float yDisplacement, zDisplacement;
+	private float newDx, newDy, newDz, newVx, newVy, newVz;
+	private float currentDx, currentDy, oldDz, oldVx, oldVy, oldVz;
+	private float angle, angleAdjusted;
+	private float gamma, gammaDegrees;
+
+	private GameObject gunballPoint;
 
 	private const float ACCELERATION = -9.81f;
 
@@ -30,9 +35,11 @@ public class Lab4 : MonoBehaviour {
 		gunBallSpawned = false;
 		initial = true;
 		lastMarker = numUpdates;
-		buffer = 3;
+		buffer = 0;
 		fixedTime = Time.fixedDeltaTime;
 		xDifference = PhysicsCalculator.calculateXDifference(boat, target);
+
+		gunballPoint = gunball.transform.GetChild(0).gameObject;
 
 		if (xDifference != 0) {
 			gamma = PhysicsCalculator.calculateGamma(xDifference, PhysicsCalculator.calculateRange(boat, target));
@@ -46,7 +53,6 @@ public class Lab4 : MonoBehaviour {
 			oldVz = PhysicsCalculator.calculateGammaVelocity(gunBallVelocity, Mathf.Cos(gamma), Mathf.Sin(angleAdjusted * Mathf.PI / 180));
 			oldVy = PhysicsCalculator.calculateGammaYVelocity(gunBallVelocity, angleAdjusted);
 			oldVx = PhysicsCalculator.calculateGammaVelocity(gunBallVelocity, Mathf.Sin(gamma), Mathf.Sin(angleAdjusted * Mathf.PI / 180));
-
 			
 		} else {
 			//calculate theta
@@ -59,7 +65,9 @@ public class Lab4 : MonoBehaviour {
 			oldVx = PhysicsCalculator.calculateXVelocity(gunBallVelocity, angle);
 			//calculate Vy
 			oldVy = PhysicsCalculator.calculateYVelocity(gunBallVelocity, angle);
-		}		
+		}
+
+
 	}
 	
 	// Update is called once per frame
@@ -117,12 +125,10 @@ public class Lab4 : MonoBehaviour {
 						gunball.transform.position = new Vector3(gunball.transform.position.x, gunball.transform.position.y + yDisplacement, gunball.transform.position.z + zDisplacement);
 					}
 
-					
-
-					if (lastMarker + buffer < numUpdates) {
-						lastMarker = numUpdates;
-						Object.Instantiate(flightMarker, new Vector3(gunball.transform.position.x, gunball.transform.position.y + yDisplacement, gunball.transform.position.z + zDisplacement), Quaternion.identity);
-					}
+					// if (lastMarker + buffer < numUpdates) {
+					// 	lastMarker = numUpdates;
+					// 	Object.Instantiate(flightMarker, new Vector3(gunball.transform.position.x, gunball.transform.position.y + yDisplacement, gunball.transform.position.z + zDisplacement), Quaternion.identity);
+					// }
 				}
 			} else {
 				if (gunball.transform.position.y - target.transform.position.y <= 0.05 && numUpdates > 0) {
@@ -147,22 +153,29 @@ public class Lab4 : MonoBehaviour {
 					} else {
 						gunball.transform.position = new Vector3(gunball.transform.position.x + newVx * fixedTime, gunball.transform.position.y + newVy * fixedTime, gunball.transform.position.z + newVz * fixedTime);
 					}
-					
 
-					if (lastMarker + buffer < numUpdates) {
-						lastMarker = numUpdates;
-						Object.Instantiate(flightMarker, new Vector3(gunball.transform.position.x, gunball.transform.position.y + yDisplacement, gunball.transform.position.z + zDisplacement), Quaternion.identity);
-					}
+					// if (lastMarker + buffer < numUpdates) {
+					// 	lastMarker = numUpdates;
+					// 	Object.Instantiate(flightMarker, new Vector3(gunball.transform.position.x, gunball.transform.position.y + yDisplacement, gunball.transform.position.z + zDisplacement), Quaternion.identity);
+					// }
 				}
 			}
+
+			omegaF = PhysicsCalculator.calculateOmegaFinal(omegaI, alphaI, (numUpdates + 1) * fixedTime);
+			theta = PhysicsCalculator.calculateThetaFinal(omegaI, alphaI, (numUpdates + 1) * fixedTime);
+			angularDisplacement = PhysicsCalculator.calculateAngularDisplacement(theta, omegaF, alphaI, fixedTime);
+			totalAngleDisplacement += angularDisplacement;
+
+			//rotate the ball
+			gunball.transform.Rotate(new Vector3(-PhysicsCalculator.toDegrees(angularDisplacement), 0, 0));
 		}
 
 		if (moving && gunBallSpawned) {
 			numUpdates++;
 
 			//update UI
-			gammaText.text = "Gamma: " + gamma;
-			angleText.text = "Alpha: " + angle;
+			gammaText.text = "Angular Velocity: " + omegaF;
+			angleText.text = "Acceleration: " + theta;
 			timeText.text = "Time: " + ((numUpdates + 1) * fixedTime) + " seconds";
 			updatesText.text = "Updates: " + (numUpdates + 1) + " frames";
 			
@@ -174,6 +187,7 @@ public class Lab4 : MonoBehaviour {
 			currentDx = newDx;
 			currentDy = newDy;
 			oldDz = newDz;
+
 		}
 	}
 }

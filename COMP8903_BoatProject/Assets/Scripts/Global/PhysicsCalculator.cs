@@ -384,4 +384,19 @@ public class PhysicsCalculator : MonoBehaviour {
 	public static float calculateYPosition(float yi, float vi, float g, float t) {
 		return (yi + (vi * t) - (0.5f * g * Mathf.Pow(t, 2)));
 	}
+
+
+// ------------------------------------------------- LAB #5 -------------------------------------------------
+
+	public static float calculateOmegaFinal(float omegaI, float alpha, float t) {
+		return (omegaI + alpha * t);
+	}
+
+	public static float calculateThetaFinal(float omegaI, float alpha, float t) {
+		return ((omegaI * t) + (alpha * Mathf.Pow(t, 2) / 2));
+	}
+
+	public static float calculateAngularDisplacement(float theta, float omega, float alpha, float t) {
+		return ((omega * t) + (alpha * Mathf.Pow(t, 2) / 2));
+	}
 }
