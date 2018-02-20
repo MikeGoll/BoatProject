@@ -405,4 +405,16 @@ public class PhysicsCalculator : MonoBehaviour {
 	public static float calculateAccelerationFromThrust(float thrust, float comMass) {
 		return thrust / comMass;
 	}
+
+	public static float calculateXThrust(float force, float angle) {
+		return force * Mathf.Sin(toRads(angle));
+	}
+
+	public static float calculateZThrust(float force, float angle) {
+		return force * Mathf.Cos(toRads(angle));
+	}
+
+	public static float toRads(float degrees) {
+		return ((degrees * Mathf.PI) / 180);
+	}
 }
