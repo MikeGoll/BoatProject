@@ -399,4 +399,10 @@ public class PhysicsCalculator : MonoBehaviour {
 	public static float calculateAngularDisplacement(float theta, float omega, float alpha, float t) {
 		return ((omega * t) + (alpha * Mathf.Pow(t, 2) / 2));
 	}
+
+// ------------------------------------------------- LAB #6 -------------------------------------------------
+
+	public static float calculateAccelerationFromThrust(float thrust, float comMass) {
+		return thrust / comMass;
+	}
 }

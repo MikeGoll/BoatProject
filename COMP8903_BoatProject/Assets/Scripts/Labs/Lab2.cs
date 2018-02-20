@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DataControllerLab2 : MonoBehaviour {
+public class Lab2 : MonoBehaviour {
 
 	public int numUpdates;
 

@@ -505,12 +505,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numUpdates: 0
-  distance: 0
-  velocity: 14
-  acceleration: -5
+  distance: 16
+  velocity: 11
+  acceleration: 2
   dragConstant: 0
-  time: 2.5
-  useDrag: 1
+  time: 0
+  useDrag: 0
   boat: {fileID: 1121528866}
   timeText: {fileID: 362369950}
   frameText: {fileID: 1802295252}

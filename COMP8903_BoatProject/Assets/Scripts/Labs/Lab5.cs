@@ -15,15 +15,12 @@ public class Lab5 : MonoBehaviour {
 	private bool moving, initial;
 	private float fixedTime;
 	private float numUpdates;
-	private float lastMarker, buffer;
 	private bool gunBallSpawned;
 	private float yDisplacement, zDisplacement;
 	private float newDx, newDy, newDz, newVx, newVy, newVz;
 	private float currentDx, currentDy, oldDz, oldVx, oldVy, oldVz;
 	private float angle, angleAdjusted;
 	private float gamma, gammaDegrees;
-
-	private GameObject gunballPoint;
 
 	private const float ACCELERATION = -9.81f;
 
@@ -34,12 +31,8 @@ public class Lab5 : MonoBehaviour {
 		moving = true;
 		gunBallSpawned = false;
 		initial = true;
-		lastMarker = numUpdates;
-		buffer = 0;
 		fixedTime = Time.fixedDeltaTime;
 		xDifference = PhysicsCalculator.calculateXDifference(boat, target);
-
-		gunballPoint = gunball.transform.GetChild(0).gameObject;
 
 		if (xDifference != 0) {
 			gamma = PhysicsCalculator.calculateGamma(xDifference, PhysicsCalculator.calculateRange(boat, target));
