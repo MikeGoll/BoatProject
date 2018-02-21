@@ -146,11 +146,6 @@ public class Lab5 : MonoBehaviour {
 					} else {
 						gunball.transform.position = new Vector3(gunball.transform.position.x + newVx * fixedTime, gunball.transform.position.y + newVy * fixedTime, gunball.transform.position.z + newVz * fixedTime);
 					}
-
-					// if (lastMarker + buffer < numUpdates) {
-					// 	lastMarker = numUpdates;
-					// 	Object.Instantiate(flightMarker, new Vector3(gunball.transform.position.x, gunball.transform.position.y + yDisplacement, gunball.transform.position.z + zDisplacement), Quaternion.identity);
-					// }
 				}
 			}
 

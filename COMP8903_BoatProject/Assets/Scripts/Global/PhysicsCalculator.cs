@@ -417,4 +417,18 @@ public class PhysicsCalculator : MonoBehaviour {
 	public static float toRads(float degrees) {
 		return ((degrees * Mathf.PI) / 180);
 	}
+
+	public static Vector3 calculateCrossProd(Vector3 v1, Vector3 v2) {
+		Vector3 resultV;
+
+		resultV.x = v1.y * v2.z - v1.z * v2.y;
+		resultV.y = v1.x * v2.z - v1.z * v2.x;
+		resultV.z = v1.x * v2.y - v1.y * v2.x;
+
+		return resultV;
+	}
+
+	public static float calculateAngularAcceleration(float torque, float comMass) {
+		return torque / comMass;
+	}
 }

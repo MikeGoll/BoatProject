@@ -7,8 +7,15 @@ public class Lab6 : MonoBehaviour {
 
 	//---------------------- LAB #6 Additions ----------------------
 	public GameObject totalBoat;
-	//force applied and angle
-	public float force, angle, dinZ, thrustX, thrustZ;
+
+	//User entered data through UI (force, angle of force, final displacement z, left angular displacement, right angular displacement)
+	public float force, angularForce, angle, dinZ, lD, rD;
+
+	//thrust in X and Z axis
+	public float thrustX, thrustAngleX, thrustZ, thrustAngleZ;
+	public Vector3 rLeft, rRight, torqueL, torqueR;
+	float[] tempL, tempR;
+	public float accelerationL, accelerationR;
 
 	//acceleration, initial velocity, final velocity, new intermediate velocity, old intermediate velocity
 	public float accelerationX, accelerationZ, v_initial, v_final, newVx, oldVx, newVz, oldVz;
@@ -17,9 +24,11 @@ public class Lab6 : MonoBehaviour {
 	public float distance, newDx, oldDx, newDz, oldDz;
 	public Text timeText, posText;
 	
-	private bool moving;
+	private bool moving, initial;
 	private float numUpdates;
 	private float fixedTime;
+	private float angularVelocity, oldAngularVelocity;
+	private float distanceZ, distanceX;
 
 	//---------------------- LAB #1 Originals ----------------------
 	//GameObject references for the boat, pilot and cannon
@@ -61,20 +70,20 @@ public class Lab6 : MonoBehaviour {
 -- Initializes the data arrays.
 ----------------------------------------------------------------------------------------------------------------------*/
 	void Start () {
-
 		//------- LAB #6 Additions -------
 		moving = false;
+		initial = true;
 		numUpdates = 0;
 		fixedTime = Time.fixedDeltaTime;
+		tempL = new float[] {0, 0, 0};
+		tempR = new float[] {0, 0, 0};
 
 		//calculate different acceleration directions
 		thrustX = PhysicsCalculator.calculateXThrust(force, angle);
 		thrustZ = PhysicsCalculator.calculateZThrust(force, angle);
 
-		//------- LAB #1 Originals -------
-		pilot = p.GetComponent<Pilot>();
-		boat = b.GetComponent<Boat>();
-		cannon = c.GetComponent<Cannon>();
+		thrustAngleX = PhysicsCalculator.calculateXThrust(angularForce, angle);
+		thrustAngleZ = PhysicsCalculator.calculateZThrust(angularForce, angle);
 	}
 	
 /*------------------------------------------------------------------------------------------------------------------
@@ -101,33 +110,56 @@ public class Lab6 : MonoBehaviour {
 			else
 				Debug.Log("Already moving");
 		}
+
+		if (initial) {
+			//------- LAB #1 Originals -------
+			pilot = p.GetComponent<Pilot>();
+			boat = b.GetComponent<Boat>();
+			cannon = c.GetComponent<Cannon>();
+
+			mass_boat = boat.getMass();
+			mass_pilot = pilot.getMass();
+			mass_cannon = cannon.getMass();
+			mass_com = PhysicsCalculator.calculateCombined(mass_boat, mass_pilot, mass_cannon);
+			
+			calculateMomentOfInertia();
+			calculateComValues();
+			calculateH();
+			calculateMH();
+			calculateInertiaTotals();
+
+			comPoint.SetVector("_COMPosition", new Vector3(comX, 0, comZ));
+
+			accelerationX = PhysicsCalculator.calculateAccelerationFromThrust(thrustX, mass_com);
+			accelerationZ = PhysicsCalculator.calculateAccelerationFromThrust(thrustZ, mass_com);
+
+			rLeft.x = 2 - comX;
+			rLeft.y = 0;
+			rLeft.z = -4 - comZ; 
+
+			rRight.x = -2 - comX;
+			rRight.y = 0;
+			rRight.z = -4 - comZ;
+
+			torqueL = PhysicsCalculator.calculateCrossProd(new Vector3(thrustAngleX, 0, thrustAngleZ), rLeft);
+			torqueR = PhysicsCalculator.calculateCrossProd(new Vector3(thrustAngleX, 0, thrustAngleZ), rRight);
+
+			accelerationL = PhysicsCalculator.calculateAngularAcceleration(torqueL.y, it_com);
+			accelerationR = PhysicsCalculator.calculateAngularAcceleration(torqueR.y, it_com);
+
+			initial = false;
+
+			Debug.Log("calculated");
+		}
 	}
 
 
 	void FixedUpdate() {
-
-		 //------- LAB #1 Originals -------
-		mass_boat = boat.getMass();
-		mass_pilot = pilot.getMass();
-		mass_cannon = cannon.getMass();
-		mass_com = PhysicsCalculator.calculateCombined(mass_boat, mass_pilot, mass_cannon);
-		
-		calculateMomentOfInertia();
-		calculateComValues();
-		calculateH();
-		calculateMH();
-		calculateInertiaTotals();
-
-		comPoint.SetVector("_COMPosition", new Vector3(comX, 0, comZ));
-
 		if (moving) {
 
-			if (Mathf.Abs(dinZ) - Mathf.Abs(totalBoat.transform.position.z) <= 0.05) {
+			if (Mathf.Abs(dinZ) - distanceZ <= 0.05) {
 				moving = false;
 			}
-
-			accelerationX = PhysicsCalculator.calculateAccelerationFromThrust(thrustX, mass_com);
-			accelerationZ = PhysicsCalculator.calculateAccelerationFromThrust(thrustZ, mass_com);
 
 			//calculate the new distances and velocities
 			newDx = PhysicsCalculator.calculateDistance(oldDx, accelerationX, oldVx, fixedTime);
@@ -135,23 +167,34 @@ public class Lab6 : MonoBehaviour {
 
 			newDz = PhysicsCalculator.calculateDistance(oldDz, accelerationZ, oldVz, Time.fixedDeltaTime);
 			newVz = PhysicsCalculator.calculateVelocity(oldVz, accelerationZ, Time.fixedDeltaTime);
+
+			float temp1 = accelerationL + accelerationR;
+			angularVelocity = oldAngularVelocity + (temp1 * fixedTime);
+
+			float temp = Mathf.Rad2Deg * (angularVelocity * fixedTime);
+
+			//update the position of the boat
+			// totalBoat.transform.position = new Vector3(totalBoat.transform.position.x + newVx * fixedTime, totalBoat.transform.position.y, totalBoat.transform.position.z + newVz * fixedTime);
+			totalBoat.transform.Translate(newVx * fixedTime, 0, newVz * fixedTime);
+			totalBoat.transform.Rotate(0, temp, 0, Space.Self);
+
+			distanceX += newVx * fixedTime;
+			distanceZ += newVz * fixedTime;
 		}		
 
 		if (moving) {
 			numUpdates++;
-
-			//update the position of the boat
-			totalBoat.transform.position = new Vector3(totalBoat.transform.position.x + newVx * fixedTime, totalBoat.transform.position.y, totalBoat.transform.position.z + newVz * fixedTime);
-
+			 
 			//update UI
 			timeText.text = "Time: " + ((numUpdates) * fixedTime) + " seconds, " + (numUpdates) + " updates";
-			posText.text = "Position: " + totalBoat.transform.position.x  + ", " + totalBoat.transform.position.y + ", " + totalBoat.transform.position.z;
+			posText.text = "Position: " + distanceX  + ", " + totalBoat.transform.position.y + ", " + distanceZ;
 			
 			oldDx = newDx;
 			oldVx = newVx;
 
 			oldDz = newDz;
 			oldVz = newVz;
+			oldAngularVelocity = angularVelocity;
 
 		} else {
 			v_final = oldVz;

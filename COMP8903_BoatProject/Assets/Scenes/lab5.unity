@@ -224,7 +224,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4050065101012588, guid: 74d370ff7ef714fdeb5df81e9840d4cd, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 74d370ff7ef714fdeb5df81e9840d4cd, type: 2}
@@ -313,7 +313,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &451402149
 GameObject:
@@ -671,7 +671,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4959977458189874, guid: 29d3d736b4a0e4ab1957f58fd1f7205e, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29d3d736b4a0e4ab1957f58fd1f7205e, type: 2}
@@ -718,7 +718,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4069058809207492, guid: 6c0f77bc49853406f9ee496bd25b3b54, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4069058809207492, guid: 6c0f77bc49853406f9ee496bd25b3b54, type: 2}
       propertyPath: m_LocalScale.x
@@ -731,6 +731,40 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6c0f77bc49853406f9ee496bd25b3b54, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1801760054 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1438837745758036, guid: 41fa6d20afcc9410c9f3a67b8e971b07,
+    type: 2}
+  m_PrefabInternal: {fileID: 1990394931}
+--- !u!114 &1801760057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1801760054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 044a4e14a8d824899b691c92118fdbd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boat: {fileID: 101403818}
+  target: {fileID: 1237586926}
+  gunball: {fileID: 1580790546906972, guid: 4205eaa6e56f046ea9f5f739b106d966, type: 2}
+  flightMarker: {fileID: 1139943970362762, guid: 73ee869c467484f689dd6abde92ef554,
+    type: 2}
+  gunBallVelocity: 20
+  omegaI: 15
+  omegaF: 0
+  alphaI: 2
+  theta: 0
+  angularDisplacement: 0
+  totalAngleDisplacement: 0
+  range: 0
+  xDifference: 0
+  updatesText: {fileID: 493429324}
+  timeText: {fileID: 963116596}
+  gammaText: {fileID: 593716272}
+  angleText: {fileID: 44930984}
 --- !u!1 &1914507360
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,44 +880,6 @@ Prefab:
     - {fileID: 114055501896408626, guid: 41fa6d20afcc9410c9f3a67b8e971b07, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 41fa6d20afcc9410c9f3a67b8e971b07, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1990394932 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1371552987254256, guid: 41fa6d20afcc9410c9f3a67b8e971b07,
-    type: 2}
-  m_PrefabInternal: {fileID: 1990394931}
---- !u!114 &1990394933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1990394932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 044a4e14a8d824899b691c92118fdbd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boat: {fileID: 101403818}
-  target: {fileID: 1237586926}
-  gunball: {fileID: 1580790546906972, guid: 4205eaa6e56f046ea9f5f739b106d966, type: 2}
-  flightMarker: {fileID: 1139943970362762, guid: 73ee869c467484f689dd6abde92ef554,
-    type: 2}
-  gunBallVelocity: 18
-  omegaI: 8
-  omegaF: 0
-  alphaI: 15
-  theta: 0
-  angularDisplacement: 0
-  totalAngleDisplacement: 0
-  range: 0
-  xDifference: 0
-  gamma: 0
-  gammaDegrees: 0
-  angle: 0
-  angleAdjusted: 0
-  updatesText: {fileID: 493429324}
-  timeText: {fileID: 963116596}
-  gammaText: {fileID: 593716272}
-  angleText: {fileID: 44930984}
 --- !u!1 &2139632724
 GameObject:
   m_ObjectHideFlags: 0
@@ -947,5 +943,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}

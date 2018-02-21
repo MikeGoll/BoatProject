@@ -118,6 +118,11 @@ GameObject:
   m_PrefabParentObject: {fileID: 1370987886279916, guid: 74d370ff7ef714fdeb5df81e9840d4cd,
     type: 2}
   m_PrefabInternal: {fileID: 1007342345}
+--- !u!4 &140500835 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4050065101012588, guid: 74d370ff7ef714fdeb5df81e9840d4cd,
+    type: 2}
+  m_PrefabInternal: {fileID: 1007342345}
 --- !u!1 &180349692
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,7 +234,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4069058809207492, guid: 6c0f77bc49853406f9ee496bd25b3b54, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4069058809207492, guid: 6c0f77bc49853406f9ee496bd25b3b54, type: 2}
       propertyPath: m_LocalScale.x
@@ -305,7 +310,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &1007342345
 Prefab:
@@ -344,7 +349,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4050065101012588, guid: 74d370ff7ef714fdeb5df81e9840d4cd, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4228099496445862, guid: 74d370ff7ef714fdeb5df81e9840d4cd, type: 2}
       propertyPath: m_LocalPosition.x
@@ -406,7 +411,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4544364971237900, guid: 41fa6d20afcc9410c9f3a67b8e971b07, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 41fa6d20afcc9410c9f3a67b8e971b07, type: 2}
@@ -429,10 +434,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalBoat: {fileID: 140500834}
   force: 4000
-  angle: 20
-  thrustX: 0
-  thrustZ: 0
+  angularForce: 0
+  angle: 0
   dinZ: 16
+  lD: 3.14
+  rD: 3.14
+  thrustX: 0
+  thrustAngleX: 0
+  thrustZ: 0
+  thrustAngleZ: 0
+  rLeft: {x: 0, y: 0, z: 0}
+  rRight: {x: 0, y: 0, z: 0}
+  torqueL: {x: 0, y: 0, z: 0}
+  torqueR: {x: 0, y: 0, z: 0}
+  accelerationL: 0
+  accelerationR: 0
   accelerationX: 0
   accelerationZ: 0
   v_initial: 0
@@ -710,7 +726,7 @@ RectTransform:
   - {fileID: 1613256673}
   - {fileID: 180349693}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -777,7 +793,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1751118182
 GameObject:
@@ -853,10 +869,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1751118182}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.09423262, y: -0, z: -0, w: 0.9955502}
+  m_LocalPosition: {x: 0, y: 2.63, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 140500835}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 10.814, y: 0, z: 0}
