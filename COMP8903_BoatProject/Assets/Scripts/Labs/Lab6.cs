@@ -12,23 +12,25 @@ public class Lab6 : MonoBehaviour {
 	public float force, angularForce, angle, dinZ, lD, rD;
 
 	//thrust in X and Z axis
-	public float thrustX, thrustAngleX, thrustZ, thrustAngleZ;
+	public Vector3 thrust, thrustAngle;
 	public Vector3 rLeft, rRight, torqueL, torqueR;
-	float[] tempL, tempR;
+	public Vector3 acceleration;
+
 	public float accelerationL, accelerationR;
 
 	//acceleration, initial velocity, final velocity, new intermediate velocity, old intermediate velocity
-	public float accelerationX, accelerationZ, v_initial, v_final, newVx, oldVx, newVz, oldVz;
+	public float v_initial, v_final, newVx, oldVx, newVz, oldVz;
 
 	//total distance, new and old distance
 	public float distance, newDx, oldDx, newDz, oldDz;
-	public Text timeText, posText;
+	public Text timeText, posText, angDText;
 	
-	private bool moving, initial;
+	private bool moving, initial, rotLeft, rotRight;
 	private float numUpdates;
 	private float fixedTime;
-	private float angularVelocity, oldAngularVelocity;
+	private float angularVelocity, oldAngularVelocity, angularDisplacement, oldAngularDisplacement;
 	private float distanceZ, distanceX;
+	private float temp1;
 
 	//---------------------- LAB #1 Originals ----------------------
 	//GameObject references for the boat, pilot and cannon
@@ -75,15 +77,13 @@ public class Lab6 : MonoBehaviour {
 		initial = true;
 		numUpdates = 0;
 		fixedTime = Time.fixedDeltaTime;
-		tempL = new float[] {0, 0, 0};
-		tempR = new float[] {0, 0, 0};
 
 		//calculate different acceleration directions
-		thrustX = PhysicsCalculator.calculateXThrust(force, angle);
-		thrustZ = PhysicsCalculator.calculateZThrust(force, angle);
+		thrust.x = PhysicsCalculator.calculateXThrust(force, angle);
+		thrust.z = PhysicsCalculator.calculateZThrust(force, angle);
 
-		thrustAngleX = PhysicsCalculator.calculateXThrust(angularForce, angle);
-		thrustAngleZ = PhysicsCalculator.calculateZThrust(angularForce, angle);
+		thrustAngle.x = PhysicsCalculator.calculateXThrust(angularForce, angle);
+		thrustAngle.z = PhysicsCalculator.calculateZThrust(angularForce, angle);
 	}
 	
 /*------------------------------------------------------------------------------------------------------------------
@@ -111,6 +111,16 @@ public class Lab6 : MonoBehaviour {
 				Debug.Log("Already moving");
 		}
 
+		if (Input.GetKeyDown(KeyCode.Q)) {
+			rotLeft = true;
+			rotRight = false;
+		}
+
+		if (Input.GetKeyDown(KeyCode.E)) {
+			rotRight = true;
+			rotLeft = false;
+		}
+
 		if (initial) {
 			//------- LAB #1 Originals -------
 			pilot = p.GetComponent<Pilot>();
@@ -130,8 +140,8 @@ public class Lab6 : MonoBehaviour {
 
 			comPoint.SetVector("_COMPosition", new Vector3(comX, 0, comZ));
 
-			accelerationX = PhysicsCalculator.calculateAccelerationFromThrust(thrustX, mass_com);
-			accelerationZ = PhysicsCalculator.calculateAccelerationFromThrust(thrustZ, mass_com);
+			acceleration.x = PhysicsCalculator.calculateAccelerationFromThrust(thrust.x, mass_com);
+			acceleration.z = PhysicsCalculator.calculateAccelerationFromThrust(thrust.z, mass_com);
 
 			rLeft.x = 2 - comX;
 			rLeft.y = 0;
@@ -141,15 +151,13 @@ public class Lab6 : MonoBehaviour {
 			rRight.y = 0;
 			rRight.z = -4 - comZ;
 
-			torqueL = PhysicsCalculator.calculateCrossProd(new Vector3(thrustAngleX, 0, thrustAngleZ), rLeft);
-			torqueR = PhysicsCalculator.calculateCrossProd(new Vector3(thrustAngleX, 0, thrustAngleZ), rRight);
+			torqueL = PhysicsCalculator.calculateCrossProd(new Vector3(thrustAngle.x, 0, thrustAngle.z), rLeft);
+			torqueR = PhysicsCalculator.calculateCrossProd(new Vector3(thrustAngle.x, 0, thrustAngle.z), rRight);
 
 			accelerationL = PhysicsCalculator.calculateAngularAcceleration(torqueL.y, it_com);
 			accelerationR = PhysicsCalculator.calculateAngularAcceleration(torqueR.y, it_com);
 
 			initial = false;
-
-			Debug.Log("calculated");
 		}
 	}
 
@@ -161,18 +169,36 @@ public class Lab6 : MonoBehaviour {
 				moving = false;
 			}
 
+			if (angularDisplacement >= rD && rotRight) {
+				moving = false;
+			}
+
+			if (angularDisplacement >= lD && rotLeft) {
+				moving = false;
+			}
+
 			//calculate the new distances and velocities
-			newDx = PhysicsCalculator.calculateDistance(oldDx, accelerationX, oldVx, fixedTime);
-			newVx = PhysicsCalculator.calculateVelocity(oldVx, accelerationX, fixedTime);
+			newDx = PhysicsCalculator.calculateDistance(oldDx, acceleration.x, oldVx, fixedTime);
+			newVx = PhysicsCalculator.calculateVelocity(oldVx, acceleration.x, fixedTime);
 
-			newDz = PhysicsCalculator.calculateDistance(oldDz, accelerationZ, oldVz, Time.fixedDeltaTime);
-			newVz = PhysicsCalculator.calculateVelocity(oldVz, accelerationZ, Time.fixedDeltaTime);
+			newDz = PhysicsCalculator.calculateDistance(oldDz, acceleration.z, oldVz, Time.fixedDeltaTime);
+			newVz = PhysicsCalculator.calculateVelocity(oldVz, acceleration.z, Time.fixedDeltaTime);
 
-			float temp1 = accelerationL + accelerationR;
+			if (rotLeft) {
+				temp1 = accelerationL;
+			}
+
+			if (rotRight) {
+				temp1 = accelerationR;
+			}
+
 			angularVelocity = oldAngularVelocity + (temp1 * fixedTime);
+
+			angularDisplacement += Mathf.Abs(angularVelocity * fixedTime);
 
 			float temp = Mathf.Rad2Deg * (angularVelocity * fixedTime);
 
+			
 			//update the position of the boat
 			// totalBoat.transform.position = new Vector3(totalBoat.transform.position.x + newVx * fixedTime, totalBoat.transform.position.y, totalBoat.transform.position.z + newVz * fixedTime);
 			totalBoat.transform.Translate(newVx * fixedTime, 0, newVz * fixedTime);
@@ -188,6 +214,7 @@ public class Lab6 : MonoBehaviour {
 			//update UI
 			timeText.text = "Time: " + ((numUpdates) * fixedTime) + " seconds, " + (numUpdates) + " updates";
 			posText.text = "Position: " + distanceX  + ", " + totalBoat.transform.position.y + ", " + distanceZ;
+			angDText.text = "Ang Displacement: " + angularDisplacement;
 			
 			oldDx = newDx;
 			oldVx = newVx;
