@@ -137,4 +137,8 @@ public class Cannon : MonoBehaviour {
 	public float getMass() {
 		return mass;
 	}
+
+	public void setMass(float newMass) {
+		mass = newMass;
+	}
 }

@@ -20,5 +20,9 @@ public class Gunball : MonoBehaviour {
 		return mass;
 	}
 
+	public void setMass(float newMass) {
+		mass = newMass;
+	}
+
 
 }

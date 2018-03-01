@@ -431,4 +431,27 @@ public class PhysicsCalculator : MonoBehaviour {
 	public static float calculateAngularAcceleration(float torque, float comMass) {
 		return torque / comMass;
 	}
+
+
+// ------------------------------------------------- LAB #7 -------------------------------------------------
+
+	public static float calculateTau(float totalMass, float dragCoefficient) {
+		return (totalMass / dragCoefficient);
+	}
+
+	public static float calculteTerminalVelocity(float thrust, float dragCoefficient) {
+		return (thrust / dragCoefficient);
+	}
+
+	public static float calculateAccelerationWithDrag(float thrust, float dragCoefficient, float vnext, float mass) {
+		return ((thrust - dragCoefficient * vnext) / mass);
+	}
+
+	public static float calculateVelocityWithDrag(float vmax, float dragCoefficient, float vi, float time, float mass) {
+		return vmax - Mathf.Pow(EXP, (-dragCoefficient) * time / mass) * (vmax - vi);
+	}
+
+	public static float calculatePositionWithDrag(float prex, float force, float dragConst, float time, float com, float vi) {
+		return prex + (force / dragConst * time) + ((force - dragConst * vi) / dragConst * com / dragConst * (Mathf.Pow(EXP, (-dragConst) * time / com) - 1) );
+	}
 }

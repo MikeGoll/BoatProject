@@ -138,4 +138,8 @@ public class Pilot : MonoBehaviour {
 	public float getMass() {
 		return mass;
 	}
+
+	public void setMass(float newMass) {
+		mass = newMass;
+	}
 }
