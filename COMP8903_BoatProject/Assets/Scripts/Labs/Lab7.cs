@@ -219,8 +219,6 @@ public class Lab7 : MonoBehaviour {
 
 			angularDisplacement += Mathf.Abs(angularVelocity * fixedTime);
 
-			float temp = Mathf.Rad2Deg * (angularVelocity * fixedTime);
-
 			
 			// //update the position of the boat
 			// // totalBoat.transform.position = new Vector3(totalBoat.transform.position.x + newVx * fixedTime, totalBoat.transform.position.y, totalBoat.transform.position.z + newVz * fixedTime);

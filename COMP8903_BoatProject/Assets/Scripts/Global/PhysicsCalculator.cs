@@ -436,7 +436,7 @@ public class PhysicsCalculator : MonoBehaviour {
 // ------------------------------------------------- LAB #7 -------------------------------------------------
 
 	public static float calculateTau(float totalMass, float dragCoefficient) {
-		return (totalMass / dragCoefficient);
+		return (totalMass / dragCoefficient);  
 	}
 
 	public static float calculteTerminalVelocity(float thrust, float dragCoefficient) {
@@ -453,5 +453,39 @@ public class PhysicsCalculator : MonoBehaviour {
 
 	public static float calculatePositionWithDrag(float prex, float force, float dragConst, float time, float com, float vi) {
 		return prex + (force / dragConst * time) + ((force - dragConst * vi) / dragConst * com / dragConst * (Mathf.Pow(EXP, (-dragConst) * time / com) - 1) );
+	}
+
+// ------------------------------------------------- LAB #8 -------------------------------------------------
+
+	public static float calculateZPositionWithWind(float zi, float vi, float tau, float time, float windVel, float gamma, float windCoefficient, float dragCoefficient) {
+		float emp = Mathf.Pow(EXP, -time / tau);
+		float temp = windCoefficient * windVel * Mathf.Cos(gamma) / dragCoefficient;
+		return zi + vi * tau * (1 - emp) + temp * tau * (1 - emp) - temp * time;
+	}
+
+	public static float calculateZVelocityWithWind(float time, float tau, float vi, float windCoefficient, float windVel, float gamma, float dragCoefficient) {
+		float emp = Mathf.Pow(EXP, -time / tau);
+		return emp * vi + (emp - 1) * windCoefficient * windVel * Mathf.Cos(gamma) / dragCoefficient;
+	}
+
+	public static float calculateYPositionWithWind(float yi, float vi, float tau, float time) {
+		float emp = Mathf.Pow(EXP, -time / tau);
+		return yi + vi * tau * (1 - emp) + GRAVITY * Mathf.Pow(tau, 2) * (1 - emp) - GRAVITY * tau * time;
+	}
+
+	public static float calculateYVelocityWithWind(float dragCoefficient, float time, float mass, float vi) {
+		float mg = mass * GRAVITY;
+		return 1 / dragCoefficient * (Mathf.Pow(EXP, -dragCoefficient * time / mass) * (dragCoefficient * vi + mg) - mg);
+	}
+
+	public static float calculateXPositionWithWind(float xi, float vi, float tau, float time, float windCoefficient, float windVel, float dragCoefficient, float gamma) {
+		float emp = Mathf.Pow(EXP, -time / tau);
+		float temp = windCoefficient * windVel * Mathf.Sin(gamma) / dragCoefficient;
+		return xi + vi * tau * (1 - emp) + temp * tau * (1 - emp) - temp * time;
+	}
+
+	public static float calculateXVelocityWithWind(float time, float tau, float vi, float windCoefficient, float windVel, float gamma, float dragCoefficient) {
+		float emp = Mathf.Pow(EXP, -time / tau);
+		return emp * vi + (emp - 1) * windCoefficient * windVel * Mathf.Sin(gamma) / dragCoefficient;
 	}
 }
