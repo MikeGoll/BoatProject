@@ -7,14 +7,18 @@ public class Lab8 : MonoBehaviour {
 
 	//---------------- Lab #8 Additions ----------------
 	public float projMass, dragCoefficient, tau, windVelocity, windCoefficient;
+	public Vector3 newDs; 
 
 	public GameObject boat, target, gunball, flightMarker;
 	public float gunBallVelocity;
-	public float range, xDifference, gamma, gammaDegrees;
+	public float gamma, gammaDegrees;
 	public float angle, angleAdjusted;
 	public float newDx, newDy, newDz, newVx, newVy, newVz;
-	public float currentDx, currentDy, oldDz, oldVx, oldVy, oldVz;
-	public Text updatesText, timeText, gammaText, angleText;
+	
+	public Text updatesText, timeText, posText, angleText;
+
+	private float range, xDifference;
+	private float currentDx, currentDy, oldDz, oldVx, oldVy, oldVz;
 
 	private bool moving, initial;
 	private float fixedTime;
@@ -115,6 +119,11 @@ public class Lab8 : MonoBehaviour {
 			newDz = PhysicsCalculator.calculateZPositionWithWind(oldDz, oldVz, tau, fixedTime, windVelocity, gamma, windCoefficient, dragCoefficient);
 
 
+			//used to display the new distance values
+			newDs.x = newDx;
+			newDs.y = newDy;
+			newDs.z = newDz;
+
 			if (gunball.transform.position.y - target.transform.position.y <= 0.05 && numUpdates > 0) {
 				moving = false;
 				timeText.text = "Time: " + ((numUpdates + 1) * fixedTime) + " seconds";
@@ -127,7 +136,9 @@ public class Lab8 : MonoBehaviour {
 						gunball.transform.Translate(gunball.transform.position.x, newVy * fixedTime, -newVx * fixedTime);
 					}
 					
-				} else { 
+				} else {
+
+					//handles any quadrant case
 					if (target.transform.position.x < boat.transform.position.x && target.transform.position.z < boat.transform.position.z) {
 						gunball.transform.Translate(-newVx * fixedTime, newVy * fixedTime, -newVz * fixedTime);
 					} else if (target.transform.position.x < boat.transform.position.x) {
@@ -150,8 +161,8 @@ public class Lab8 : MonoBehaviour {
 			numUpdates++;
 
 			//update UI
-			gammaText.text = "Gamma: " + gamma;
-			angleText.text = "Alpha: " + angle;
+			posText.text = "Position: " + gunball.transform.position.x + ", " + gunball.transform.position.y + ", " + gunball.transform.position.z;
+			// angleText.text = "Distance: " + newDx + ", " + newDy + ", " + newDz;
 			timeText.text = "Time: " + ((numUpdates + 1) * fixedTime) + " seconds";
 			updatesText.text = "Updates: " + (numUpdates + 1) + " frames";
 			

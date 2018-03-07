@@ -226,8 +226,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: -75}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -140, y: -75}
+  m_SizeDelta: {x: 300, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &105534276
 MonoBehaviour:
@@ -261,7 +261,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Alpha:'
+  m_Text: 
 --- !u!222 &105534277
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -404,8 +404,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: -15}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -140, y: -15}
+  m_SizeDelta: {x: 300, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &804393270
 MonoBehaviour:
@@ -676,8 +676,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: -35}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -140, y: -35}
+  m_SizeDelta: {x: 300, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1117372587
 MonoBehaviour:
@@ -799,7 +799,7 @@ GameObject:
   - component: {fileID: 1852846674}
   - component: {fileID: 1852846673}
   m_Layer: 5
-  m_Name: gamma
+  m_Name: position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -820,8 +820,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: -55}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -140, y: -55}
+  m_SizeDelta: {x: 300, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1852846673
 MonoBehaviour:
@@ -855,7 +855,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Gamma: '
+  m_Text: 'Position:'
 --- !u!222 &1852846674
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -959,14 +959,13 @@ MonoBehaviour:
   tau: 0
   windVelocity: 0
   windCoefficient: 0
+  newDs: {x: 0, y: 0, z: 0}
   boat: {fileID: 937145091}
   target: {fileID: 1453982293}
   gunball: {fileID: 1647099980378008, guid: f02e5f3b13ba443c39e3900148d67700, type: 2}
   flightMarker: {fileID: 1139943970362762, guid: 73ee869c467484f689dd6abde92ef554,
     type: 2}
   gunBallVelocity: 25
-  range: 0
-  xDifference: 0
   gamma: 0
   gammaDegrees: 0
   angle: 0
@@ -977,13 +976,7 @@ MonoBehaviour:
   newVx: 0
   newVy: 0
   newVz: 0
-  currentDx: 0
-  currentDy: 0
-  oldDz: 0
-  oldVx: 0
-  oldVy: 0
-  oldVz: 0
   updatesText: {fileID: 804393270}
   timeText: {fileID: 1117372587}
-  gammaText: {fileID: 1852846673}
+  posText: {fileID: 1852846673}
   angleText: {fileID: 105534276}
