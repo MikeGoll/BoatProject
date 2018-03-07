@@ -34,7 +34,7 @@ public class Lab8 : MonoBehaviour {
 		lastMarker = numUpdates;
 		buffer = 3;
 		fixedTime = Time.fixedDeltaTime;
-		
+
 		range = PhysicsCalculator.calculateRange(boat, target);
 		xDifference = PhysicsCalculator.calculateXDifference(boat, target);
 
@@ -120,9 +120,25 @@ public class Lab8 : MonoBehaviour {
 				timeText.text = "Time: " + ((numUpdates + 1) * fixedTime) + " seconds";
 			} else {
 
-				gunball.transform.Translate(newVx * fixedTime, newVy * fixedTime, newVz * fixedTime);
+				if (xDifference == 0) {
+					if (target.transform.position.z > boat.transform.position.z) {
+						gunball.transform.Translate(gunball.transform.position.x, newVy * fixedTime, newVx * fixedTime);
+					} else {
+						gunball.transform.Translate(gunball.transform.position.x, newVy * fixedTime, -newVx * fixedTime);
+					}
+					
+				} else { 
+					if (target.transform.position.x < boat.transform.position.x && target.transform.position.z < boat.transform.position.z) {
+						gunball.transform.Translate(-newVx * fixedTime, newVy * fixedTime, -newVz * fixedTime);
+					} else if (target.transform.position.x < boat.transform.position.x) {
+						gunball.transform.Translate(-newVx * fixedTime, newVy * fixedTime, newVz * fixedTime);
+					} else if (target.transform.position.z < boat.transform.position.z) {
+						gunball.transform.Translate(newVx * fixedTime, newVy * fixedTime, -newVz * fixedTime);
+					} else {
+						gunball.transform.Translate(newVx * fixedTime, newVy * fixedTime, newVz * fixedTime);
+					}
+				}
 
-			
 				if (lastMarker + buffer < numUpdates) {
 					lastMarker = numUpdates;
 					Object.Instantiate(flightMarker, new Vector3(gunball.transform.position.x, gunball.transform.position.y + yDisplacement, gunball.transform.position.z + zDisplacement), Quaternion.identity);
