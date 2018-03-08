@@ -6,32 +6,60 @@ using UnityEngine.UI;
 public class Lab7 : MonoBehaviour {
 
 	//---------------------- LAB #7 Additions ----------------------
+	[Header("Lab 7 Attributes - Editable")]
+	[Tooltip("Enables/Disables the 2 second stop. Disable to allow for dynamic acceleration")]
 	public bool dynamicControls;
 	public float dragCoefficient;
+
+	[Header("Lab 7 Calculated")]
 	public float tau;
 	public float vMax;
 	public float accelerationWithDrag;
 
-	public float testVel;
-
 	//---------------------- LAB #6 Additions ----------------------
-	public GameObject totalBoat;
+	[Header("Lab 6 Attributes - Editable")]
+	//User entered data through UI (force, angle of force, angle, final displacement z, left angular displacement, right angular displacement)
+	public float angularForce;
+	public float angle;
 
-	//User entered data through UI (force, angle of force, final displacement z, left angular displacement, right angular displacement)
-	public float force, angularForce, angle, dinZ, lD, rD;
+	[Header("Lab 6 Calculated")]
+	public float force;
+	// public float dinZ;
+	// public float lD;
+	// public float rD;
 
 	//thrust in X and Z axis
-	public Vector3 thrust, thrustAngle;
-	public Vector3 rLeft, rRight, torqueL, torqueR;
+	[Header("Thrust Values")]
+	public Vector3 thrust;
+	public Vector3 thrustAngle;
+	public Vector3 rLeft;
+	public Vector3 rRight;
+	[Header("Torque & Acceleration Values")]
+	public Vector3 torqueL;
+	public Vector3 torqueR;
 	public Vector3 acceleration;
 
 	public float accelerationL, accelerationR;
 
+	[Header("Velocity Values")]
 	//acceleration, initial velocity, final velocity, new intermediate velocity, old intermediate velocity
-	public float v_initial, v_final, newVx, oldVx, newVz, oldVz;
+	public float v_initial;
+	public float v_final;
+	public float newVx;
+	public float oldVx;
+	public float newVz;
+	public float oldVz;
 
 	//total distance, new and old distance
-	public float distance, newDx, oldDx, newDz, oldDz;
+	[Header("Distance Values")]
+	public float distance;
+	public float newDx;
+	public float oldDx;
+	public float newDz;
+	public float oldDz;
+
+	[Header("Objects and Text")]
+	public GameObject totalBoat;
 	public Text timeText, posText, angDText, disText;
 	
 	private bool moving, initial, rotLeft, rotRight;
@@ -42,17 +70,39 @@ public class Lab7 : MonoBehaviour {
 	private float temp1;
 
 	//---------------------- LAB #1 Originals ----------------------
+	[Header("Lab 1 Objects")]
 	//GameObject references for the boat, pilot and cannon
-	public GameObject b, p, c;
+	public GameObject b;
+	public GameObject p;
+	public GameObject c;
 	//masses of the objects
-	public float mass_boat, mass_pilot, mass_cannon, mass_com;
+	[Header("Mass Values")]
+	public float mass_boat;
+	public float mass_pilot;
+	public float mass_cannon;
+	public float mass_com;
 	//moments of inertia of the objects
-	public float moi_boat, moi_pilot, moi_cannon, moi_com;
+	[Header("Moment of Inertia Values")]
+	public float moi_boat;
+	public float moi_pilot;
+	public float moi_cannon;
+	public float moi_com;
 	//rotation point of the objects
-	public float mh_boat, mh_pilot, mh_cannon, mh_com;
+	[Header("MH Values")]
+	public float mh_boat; 
+	public float mh_pilot;
+	public float mh_cannon;
+	public float mh_com;
 	//inertia totals of the objects
-	public float it_boat, it_pilot, it_cannon, it_com;
-	public float comX, comZ;
+	[Header("Combined Values")]
+	public float it_boat;
+	public float it_pilot;
+	public float it_cannon;
+	public float it_com;
+
+	[Space(20)]
+	public float comX;
+	public float comZ;
 	//h of the objects
 	public float h_boat, h_pilot, h_cannon;
 	//pilot object used to obtain pilot data

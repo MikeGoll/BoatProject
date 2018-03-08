@@ -524,14 +524,9 @@ MonoBehaviour:
   tau: 0
   vMax: 0
   accelerationWithDrag: 0
-  testVel: 0
-  totalBoat: {fileID: 140500834}
-  force: 0
   angularForce: 0
   angle: 0
-  dinZ: 0
-  lD: 0
-  rD: 0
+  force: 5000
   thrust: {x: 0, y: 0, z: 0}
   thrustAngle: {x: 0, y: 0, z: 0}
   rLeft: {x: 0, y: 0, z: 0}
@@ -552,6 +547,7 @@ MonoBehaviour:
   oldDx: 0
   newDz: 0
   oldDz: 0
+  totalBoat: {fileID: 140500834}
   timeText: {fileID: 1181542505}
   posText: {fileID: 1613256674}
   angDText: {fileID: 965118058}
