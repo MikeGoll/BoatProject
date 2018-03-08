@@ -488,4 +488,19 @@ public class PhysicsCalculator : MonoBehaviour {
 		float emp = Mathf.Pow(EXP, -time / tau);
 		return emp * vi + (emp - 1) * windCoefficient * windVel * Mathf.Sin(gamma) / dragCoefficient;
 	}
+
+// ------------------------------------------------- LAB #9 -------------------------------------------------
+
+	public static float calculateJImpulse(float vr, float e, float gunballMass, float targetMass) {
+		return -vr * (e + 1) * targetMass * gunballMass / (targetMass + gunballMass);
+	}
+
+	public static float calculateRecoilVelocity(float jImpulse, float mass, float vi) {
+		return jImpulse / mass + vi;
+	}
+
+	public static float calculateMomentum(float mass, float vi) {
+		Debug.Log("Mass: " + mass + ", vi: " + vi);
+		return mass * vi;
+	}
 }

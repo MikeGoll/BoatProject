@@ -3,13 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Lab8 : MonoBehaviour {
+public class Lab9 : MonoBehaviour {
 
-	//---------------- Lab #8 Additions ----------------
-	[Header("Editable Attributes")]
-	public float dragCoefficient;
+	//---------------- Lab #9 Additions ----------------
+	[Header("Target Attributes")]
+	public float targetMass;
+	public float targetVelocity;
+	public float targetVelocityFinal;
+	[Header("Gunball Attributes")]
 	public float projMass;
 	public float gunBallVelocity;
+	public float gunBallVelocityFinal;
+
+	[Space(10)]
+	[Tooltip("Restitution coefficient - determines if the objects stick together or bounce upon impact.")]
+	public float e;
+	public float jImpulse;
+	public Vector3 momentumInitial;
+	public Vector3 momentumFinal;
+
+
+	//---------------- Lab #8 Additions ----------------
+	[Header("Lab 8 Attributes - Editable")]
+	public float dragCoefficient;
 	
 	[Header("Lab 8 Attributes")]
 	public float tau;
@@ -49,7 +65,7 @@ public class Lab8 : MonoBehaviour {
 	private float lastMarker, buffer;
 	private float yDisplacement, zDisplacement;
 
-	private bool moving, initial;
+	private static bool moving, initial;
 	private bool gunBallSpawned;
 
 	private const float ACCELERATION = -9.81f;
@@ -98,6 +114,12 @@ public class Lab8 : MonoBehaviour {
 		tau = PhysicsCalculator.calculateTau(projMass, dragCoefficient);
 		windVelocity = 2.0f;
 		windCoefficient = 0.1f;
+
+		//---------------- Lab #9 Additions ----------------
+		jImpulse = PhysicsCalculator.calculateJImpulse((gunBallVelocity - targetVelocity), e, projMass, targetMass);
+		momentumInitial.x = PhysicsCalculator.calculateMomentum(projMass, gunBallVelocity);
+		momentumInitial.y = PhysicsCalculator.calculateMomentum(targetMass, targetVelocity);
+		momentumInitial.z = momentumInitial.x + momentumInitial.y;
 	}
 	
 	// Update is called once per frame
@@ -109,8 +131,9 @@ public class Lab8 : MonoBehaviour {
 
 				//spawn the ball
 				gunball = Object.Instantiate(gunball, new Vector3(0, 0, boat.transform.position.z), Quaternion.identity);
+				moving = true;
 			} else {
-				Debug.Log("Ball already spawned");
+				moving = !moving;
 			}
 		}
 	}
@@ -132,26 +155,30 @@ public class Lab8 : MonoBehaviour {
 
 			angle = PhysicsCalculator.calculateTheta(range, gunBallVelocity) * 180 / Mathf.PI;
 		
-			newVx = PhysicsCalculator.calculateXVelocityWithWind(fixedTime, tau, oldVx, windCoefficient, windVelocity, gamma, dragCoefficient);
-			newVy = PhysicsCalculator.calculateYVelocityWithWind(dragCoefficient, fixedTime, projMass, oldVy);
-			newVz = PhysicsCalculator.calculateZVelocityWithWind(fixedTime, tau, oldVz, windCoefficient, windVelocity, gamma, dragCoefficient);
+			// newVx = PhysicsCalculator.calculateXVelocityWithWind(fixedTime, tau, oldVx, windCoefficient, windVelocity, gamma, dragCoefficient);
+			// newVy = PhysicsCalculator.calculateYVelocityWithWind(dragCoefficient, fixedTime, projMass, oldVy);
+			// newVz = PhysicsCalculator.calculateZVelocityWithWind(fixedTime, tau, oldVz, windCoefficient, windVelocity, gamma, dragCoefficient);
 
-			newDx = PhysicsCalculator.calculateXPositionWithWind(currentDx, oldVx, tau, fixedTime, windCoefficient, windVelocity, dragCoefficient, gamma);
-			newDy = PhysicsCalculator.calculateYPositionWithWind(currentDy, oldVy, tau, fixedTime);
-			newDz = PhysicsCalculator.calculateZPositionWithWind(oldDz, oldVz, tau, fixedTime, windVelocity, gamma, windCoefficient, dragCoefficient);
+			// newDx = PhysicsCalculator.calculateXPositionWithWind(currentDx, oldVx, tau, fixedTime, windCoefficient, windVelocity, dragCoefficient, gamma);
+			// newDy = PhysicsCalculator.calculateYPositionWithWind(currentDy, oldVy, tau, fixedTime);
+			// newDz = PhysicsCalculator.calculateZPositionWithWind(oldDz, oldVz, tau, fixedTime, windVelocity, gamma, windCoefficient, dragCoefficient);
 
-			if (gunball.transform.position.y <= 0.05 && numUpdates > 0) {
-				moving = false;
+			//run lab 4
+			newVx = PhysicsCalculator.calculateVelocity(oldVx, 0, fixedTime);
+			newVy = PhysicsCalculator.calculateYVelocityGamma(oldVy, -ACCELERATION, fixedTime);
+			newVz = PhysicsCalculator.calculateVelocity(oldVz, 0, fixedTime);
+
+			newDx = PhysicsCalculator.calculateXPosition(currentDx, oldVx, angle, gamma, fixedTime);
+			newDy = PhysicsCalculator.calculateYPosition(currentDy, oldVy, -ACCELERATION, fixedTime);
+			newDz = PhysicsCalculator.calculateZPosition(oldDz, oldVz, angle, PhysicsCalculator.toDegrees(gamma), fixedTime);
+
+			if (target.transform.position.z - gunball.transform.position.z <= 1.05 && numUpdates > 0) {
+				// moving = false;
 				timeText.text = "Time: " + ((numUpdates + 1) * fixedTime) + " seconds";
 			} else {
 
 				if (xDifference == 0) {
-					if (target.transform.position.z > boat.transform.position.z) {
-						gunball.transform.Translate(gunball.transform.position.x, newVy * fixedTime, newVx * fixedTime);
-					} else {
-						gunball.transform.Translate(gunball.transform.position.x, newVy * fixedTime, -newVx * fixedTime);
-					}
-					
+					gunball.transform.Translate(gunball.transform.position.x, gunball.transform.position.y, newVx * fixedTime);
 				} else {
 
 					//handles any quadrant case
@@ -171,13 +198,15 @@ public class Lab8 : MonoBehaviour {
 					Object.Instantiate(flightMarker, new Vector3(gunball.transform.position.x, gunball.transform.position.y + yDisplacement, gunball.transform.position.z + zDisplacement), Quaternion.identity);
 				}
 			}
+
+			target.transform.Translate(0, 0, targetVelocity * fixedTime);
 		}
 
 		if (moving && gunBallSpawned) {
 			numUpdates++;
 
 			//update UI
-			posText.text = "Position: " + gunball.transform.position.x + ", " + gunball.transform.position.y + ", " + gunball.transform.position.z;
+			posText.text = "Masses (Ball/Target): " + projMass + "kg, " + targetMass + "kg";
 			timeText.text = "Time: " + ((numUpdates + 1) * fixedTime) + " seconds";
 			updatesText.text = "Updates: " + (numUpdates + 1) + " frames";
 			
@@ -189,5 +218,19 @@ public class Lab8 : MonoBehaviour {
 			currentDy = newDy;
 			oldDz = newDz;
 		}
+	}
+
+	public void pause() {
+		moving = !moving;
+
+		//react to the collision
+		oldVx = PhysicsCalculator.calculateRecoilVelocity(jImpulse, projMass, gunBallVelocity);
+		gunBallVelocityFinal = oldVx;
+
+		targetVelocityFinal = PhysicsCalculator.calculateRecoilVelocity(-jImpulse, targetMass, targetVelocity);
+		
+		momentumFinal.x = PhysicsCalculator.calculateMomentum(projMass, oldVx);
+		momentumFinal.y = PhysicsCalculator.calculateMomentum(targetMass, targetVelocity);
+		momentumFinal.z = momentumFinal.x + momentumFinal.y;
 	}
 }
