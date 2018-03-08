@@ -6,26 +6,51 @@ using UnityEngine.UI;
 public class Lab8 : MonoBehaviour {
 
 	//---------------- Lab #8 Additions ----------------
-	public float projMass, dragCoefficient, tau, windVelocity, windCoefficient;
-	public Vector3 newDs; 
-
-	public GameObject boat, target, gunball, flightMarker;
+	[Header("Editable Attributes")]
+	public float dragCoefficient;
+	public float projMass;
 	public float gunBallVelocity;
-	public float gamma, gammaDegrees;
-	public float angle, angleAdjusted;
-	public float newDx, newDy, newDz, newVx, newVy, newVz;
 	
-	public Text updatesText, timeText, posText, angleText;
+	[Header("Lab 8 Attributes")]
+	public float tau;
+	public float windVelocity;
+	public float windCoefficient;
+
+	[Header("Projectile Calculations")]
+	public float gamma;
+	public float gammaDegrees;
+	public float angle;
+	public float angleAdjusted;
+
+	[Header("Distance Calculations")]
+	public float newDx;
+	public float newDy;
+	public float newDz;
+
+	[Header("Velocity Calculations")]
+	public float newVx;
+	public float newVy;
+	public float newVz;
+	
+	[Header("Game Objects and Text")]
+	public GameObject boat;
+	public GameObject target;
+	public GameObject gunball;
+	public GameObject flightMarker;
+	public Text updatesText;
+	public Text timeText;
+	public Text posText;
+	public Text angleText;
 
 	private float range, xDifference;
 	private float currentDx, currentDy, oldDz, oldVx, oldVy, oldVz;
-
-	private bool moving, initial;
 	private float fixedTime;
 	private float numUpdates;
 	private float lastMarker, buffer;
-	private bool gunBallSpawned;
 	private float yDisplacement, zDisplacement;
+
+	private bool moving, initial;
+	private bool gunBallSpawned;
 
 	private const float ACCELERATION = -9.81f;
 
@@ -69,10 +94,8 @@ public class Lab8 : MonoBehaviour {
 			oldVy = PhysicsCalculator.calculateYVelocity(gunBallVelocity, angle);
 		}
 
-
 		//---------------- Lab #8 Additions ----------------
-		tau = PhysicsCalculator.calculateTau(1, dragCoefficient);
-		projMass = 1.0f;
+		tau = PhysicsCalculator.calculateTau(projMass, dragCoefficient);
 		windVelocity = 2.0f;
 		windCoefficient = 0.1f;
 	}
@@ -113,18 +136,11 @@ public class Lab8 : MonoBehaviour {
 			newVy = PhysicsCalculator.calculateYVelocityWithWind(dragCoefficient, fixedTime, projMass, oldVy);
 			newVz = PhysicsCalculator.calculateZVelocityWithWind(fixedTime, tau, oldVz, windCoefficient, windVelocity, gamma, dragCoefficient);
 
-
 			newDx = PhysicsCalculator.calculateXPositionWithWind(currentDx, oldVx, tau, fixedTime, windCoefficient, windVelocity, dragCoefficient, gamma);
 			newDy = PhysicsCalculator.calculateYPositionWithWind(currentDy, oldVy, tau, fixedTime);
 			newDz = PhysicsCalculator.calculateZPositionWithWind(oldDz, oldVz, tau, fixedTime, windVelocity, gamma, windCoefficient, dragCoefficient);
 
-
-			//used to display the new distance values
-			newDs.x = newDx;
-			newDs.y = newDy;
-			newDs.z = newDz;
-
-			if (gunball.transform.position.y - target.transform.position.y <= 0.05 && numUpdates > 0) {
+			if (gunball.transform.position.y <= 0.0 && numUpdates > 0) {
 				moving = false;
 				timeText.text = "Time: " + ((numUpdates + 1) * fixedTime) + " seconds";
 			} else {
@@ -162,10 +178,8 @@ public class Lab8 : MonoBehaviour {
 
 			//update UI
 			posText.text = "Position: " + gunball.transform.position.x + ", " + gunball.transform.position.y + ", " + gunball.transform.position.z;
-			// angleText.text = "Distance: " + newDx + ", " + newDy + ", " + newDz;
 			timeText.text = "Time: " + ((numUpdates + 1) * fixedTime) + " seconds";
 			updatesText.text = "Updates: " + (numUpdates + 1) + " frames";
-			
 			
 			oldVx = newVx;
 			oldVy = newVy;

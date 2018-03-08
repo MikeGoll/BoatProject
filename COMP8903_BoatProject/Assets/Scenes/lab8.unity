@@ -954,18 +954,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a53ad5fcac864ed6a8e22e2539c5134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projMass: 1
   dragCoefficient: 1
+  projMass: 1
+  gunBallVelocity: 25
   tau: 0
   windVelocity: 0
   windCoefficient: 0
-  newDs: {x: 0, y: 0, z: 0}
-  boat: {fileID: 937145091}
-  target: {fileID: 1453982293}
-  gunball: {fileID: 1647099980378008, guid: f02e5f3b13ba443c39e3900148d67700, type: 2}
-  flightMarker: {fileID: 1139943970362762, guid: 73ee869c467484f689dd6abde92ef554,
-    type: 2}
-  gunBallVelocity: 25
   gamma: 0
   gammaDegrees: 0
   angle: 0
@@ -976,6 +970,11 @@ MonoBehaviour:
   newVx: 0
   newVy: 0
   newVz: 0
+  boat: {fileID: 937145091}
+  target: {fileID: 1453982293}
+  gunball: {fileID: 1647099980378008, guid: f02e5f3b13ba443c39e3900148d67700, type: 2}
+  flightMarker: {fileID: 1139943970362762, guid: 73ee869c467484f689dd6abde92ef554,
+    type: 2}
   updatesText: {fileID: 804393270}
   timeText: {fileID: 1117372587}
   posText: {fileID: 1852846673}
