@@ -11,7 +11,6 @@ public class TargetCollision : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		lab9 = GameObject.FindObjectOfType(typeof(Lab9)) as Lab9;
-		Debug.Log(lab9);
 		initial = true;
 	}
 	
@@ -22,7 +21,6 @@ public class TargetCollision : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-		Debug.Log("HIT");
 		if (initial) {
 			initial = false;
 

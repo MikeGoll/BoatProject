@@ -9,7 +9,6 @@ public class Lab9 : MonoBehaviour {
 	[Header("Target Attributes")]
 	public float targetMass;
 	public float targetVelocity;
-	public float targetVelocityFinal;
 	[Header("Gunball Attributes")]
 	public float projMass;
 	public float gunBallVelocity;
@@ -120,6 +119,9 @@ public class Lab9 : MonoBehaviour {
 		momentumInitial.x = PhysicsCalculator.calculateMomentum(projMass, gunBallVelocity);
 		momentumInitial.y = PhysicsCalculator.calculateMomentum(targetMass, targetVelocity);
 		momentumInitial.z = momentumInitial.x + momentumInitial.y;
+
+		//have this here to satisfy requirement of needing to show initial target velocity
+		Debug.Log("Target Initial Velocity: " + targetVelocity);
 	}
 	
 	// Update is called once per frame
@@ -227,7 +229,7 @@ public class Lab9 : MonoBehaviour {
 		oldVx = PhysicsCalculator.calculateRecoilVelocity(jImpulse, projMass, gunBallVelocity);
 		gunBallVelocityFinal = oldVx;
 
-		targetVelocityFinal = PhysicsCalculator.calculateRecoilVelocity(-jImpulse, targetMass, targetVelocity);
+		targetVelocity = PhysicsCalculator.calculateRecoilVelocity(-jImpulse, targetMass, targetVelocity);
 		
 		momentumFinal.x = PhysicsCalculator.calculateMomentum(projMass, oldVx);
 		momentumFinal.y = PhysicsCalculator.calculateMomentum(targetMass, targetVelocity);

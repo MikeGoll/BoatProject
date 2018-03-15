@@ -500,7 +500,6 @@ public class PhysicsCalculator : MonoBehaviour {
 	}
 
 	public static float calculateMomentum(float mass, float vi) {
-		Debug.Log("Mass: " + mass + ", vi: " + vi);
 		return mass * vi;
 	}
 }

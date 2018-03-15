@@ -912,11 +912,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetMass: 3
   targetVelocity: 0
-  targetVelocityFinal: 0
   projMass: 1
-  gunBallVelocity: 30
+  gunBallVelocity: 25
   gunBallVelocityFinal: 0
-  e: 1
+  e: 0
   jImpulse: 0
   momentumInitial: {x: 0, y: 0, z: 0}
   momentumFinal: {x: 0, y: 0, z: 0}
