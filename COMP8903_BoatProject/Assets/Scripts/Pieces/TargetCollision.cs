@@ -28,7 +28,7 @@ public class TargetCollision : MonoBehaviour {
 			this.GetComponent<Rigidbody>().detectCollisions = false;
 
 			if (Mathf.Abs(ballPos.z - transform.position.z) > 0) {
-				other.gameObject.transform.position = new Vector3(ballPos.x, ballPos.y, Mathf.Floor(ballPos.z));
+				other.gameObject.transform.position = new Vector3(ballPos.x, ballPos.y, transform.position.z - 1);
 			}
 
 			lab9.pause();

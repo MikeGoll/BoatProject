@@ -915,7 +915,7 @@ MonoBehaviour:
   projMass: 1
   gunBallVelocity: 25
   gunBallVelocityFinal: 0
-  e: 0
+  e: 1
   jImpulse: 0
   momentumInitial: {x: 0, y: 0, z: 0}
   momentumFinal: {x: 0, y: 0, z: 0}
