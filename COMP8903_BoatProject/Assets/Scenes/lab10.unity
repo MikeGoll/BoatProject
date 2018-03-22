@@ -989,14 +989,14 @@ MonoBehaviour:
   tangentials: {x: 0, y: 0, z: 0}
   jNormal: 0
   energyInitialX: {x: 0, y: 0, z: 0}
-  energyFinalX: {x: 0, y: 0, z: 0}
   energyInitialZ: {x: 0, y: 0, z: 0}
+  energyFinalX: {x: 0, y: 0, z: 0}
   energyFinalZ: {x: 0, y: 0, z: 0}
-  momentumInitialX: {x: 0, y: 0, z: 0}
-  momentumFinalX: {x: 0, y: 0, z: 0}
-  momentumInitialZ: {x: 0, y: 0, z: 0}
-  momentumFinalZ: {x: 0, y: 0, z: 0}
   totalEnergy: 0
+  momentumInitialX: {x: 0, y: 0, z: 0}
+  momentumInitialZ: {x: 0, y: 0, z: 0}
+  momentumFinalX: {x: 0, y: 0, z: 0}
+  momentumFinalZ: {x: 0, y: 0, z: 0}
   targetVelocityFinal: 0
   bulletinitialNormal: 0
   bulletinitialTang: 0

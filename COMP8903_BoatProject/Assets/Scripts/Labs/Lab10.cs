@@ -272,17 +272,9 @@ public class Lab10: MonoBehaviour {
 		moving = !moving;
 		collided = true;
 
-		float velR = gunBallVelocity - targetVelocity;
-		jImpulse = -velR * (e + 1) * projMass * targetMass / (projMass + targetMass);
-
-		gunBallVelocityFinal = jImpulse / projMass + gunBallVelocity;
-		targetVelocityFinal = -jImpulse / targetMass + targetVelocity;
-
 		//react to the collision
-		// oldVx = PhysicsCalculator.calculateRecoilVelocity(jImpulse, projMass, gunBallVelocity);
-		// gunBallVelocityFinal = oldVx;
-
-		// targetVelocity = PhysicsCalculator.calculateRecoilVelocity(-jImpulse, targetMass, targetVelocity);
+		gunBallVelocityFinal = PhysicsCalculator.calculateRecoilVelocity(jImpulse, projMass, gunBallVelocity);
+		targetVelocityFinal  = PhysicsCalculator.calculateRecoilVelocity(-jImpulse, targetMass, targetVelocity);
 
 		//Lab #10
 		normals.x = target.transform.position.x - gunball.transform.position.x;
@@ -355,6 +347,5 @@ public class Lab10: MonoBehaviour {
 		energyFinalX.z = energyFinalX.x + energyFinalX.y;
 
 		totalEnergy = energyFinalX.z + energyFinalZ.z;
-
 	}
 }
