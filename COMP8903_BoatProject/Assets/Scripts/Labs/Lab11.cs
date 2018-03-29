@@ -6,8 +6,13 @@ using UnityEngine.UI;
 public class Lab11: MonoBehaviour {
 
 	//---------------- Lab #11 Additions ----------------
-	public float lowCaseR1, lowCaseR2;
-
+	public Vector3 P;
+	public Vector3 R1, R2;
+	public Vector3 lowCaseR1, lowCaseR2;
+	public Vector3 omegaBallI, omegaTargetI, omegaBallF, omegaTargetF;
+	public float moi1, moi2;
+	public Vector3 LInitial, LFinal1, LFinal2;
+	public Vector3 LFinalTotal;
 
 	//---------------- Lab #10 Additions ----------------
 	public Vector3 normals, tangentials;
@@ -119,7 +124,7 @@ public class Lab11: MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		numUpdates = 0;
-		moving = true;
+		moving = false;
 		gunBallSpawned = false;
 		initial = true;
 		lastMarker = numUpdates;
@@ -129,7 +134,6 @@ public class Lab11: MonoBehaviour {
 		oldVz = gunBallVelocity;
 
 		range = PhysicsCalculator.calculateRange(boat, target);
-		xDifference = PhysicsCalculator.calculateXDifference(boat, target);
 
 		collided = false;
 
@@ -149,21 +153,21 @@ public class Lab11: MonoBehaviour {
 			
 		} else {
 			//calculate theta
-			angle = PhysicsCalculator.calculateAngle(ACCELERATION, xDifference, range, gunBallVelocity);
+			// angle = PhysicsCalculator.calculateAngle(ACCELERATION, xDifference, range, gunBallVelocity);
 
-			//change angle to degrees
-			angle = PhysicsCalculator.toDegrees(angle) / 2;
+			// //change angle to degrees
+			// angle = PhysicsCalculator.toDegrees(angle) / 2;
 
-			//calculate Vx
-			oldVx = PhysicsCalculator.calculateXVelocity(gunBallVelocity, angle);
-			//calculate Vy
-			oldVy = PhysicsCalculator.calculateYVelocity(gunBallVelocity, angle);
+			// //calculate Vx
+			// oldVx = PhysicsCalculator.calculateXVelocity(gunBallVelocity, angle);
+			// //calculate Vy
+			// oldVy = PhysicsCalculator.calculateYVelocity(gunBallVelocity, angle);
 		}
 
 		//---------------- Lab #8 Additions ----------------
-		tau = PhysicsCalculator.calculateTau(projMass, dragCoefficient);
-		windVelocity = 2.0f;
-		windCoefficient = 0.1f;
+		// tau = PhysicsCalculator.calculateTau(projMass, dragCoefficient);
+		// windVelocity = 2.0f;
+		// windCoefficient = 0.1f;
 
 		//---------------- Lab #9 Additions ----------------
 		jImpulse = PhysicsCalculator.calculateJImpulse((gunBallVelocity - targetVelocity), e, projMass, targetMass);
@@ -173,6 +177,10 @@ public class Lab11: MonoBehaviour {
 
 		//have this here to satisfy requirement of needing to show initial target velocity
 		Debug.Log("Target Initial Velocity: " + targetVelocity);
+
+		//---------------- Lab #11 Additions ----------------
+		moi1 = PhysicsCalculator.calculateMOI(projMass);
+		moi2 = PhysicsCalculator.calculateMOI(targetMass);
 	}
 	
 	// Update is called once per frame
@@ -183,7 +191,7 @@ public class Lab11: MonoBehaviour {
 				//adjust the gun rotation
 
 				//spawn the ball
-				gunball = Object.Instantiate(gunball, new Vector3(0, 0, boat.transform.position.z), Quaternion.identity);
+				gunball = Object.Instantiate(gunball, new Vector3(0, 0, 0), Quaternion.identity);
 				moving = true;
 			} else {
 				moving = !moving;
@@ -192,50 +200,51 @@ public class Lab11: MonoBehaviour {
 	}
 
 	void FixedUpdate() {
+
 		if (moving && gunBallSpawned) {
 
-			if (initial) {
-				initial = false;
+			// if (initial) {
+			// 	initial = false;
 
-				if (xDifference == 0) {
-					//rotates the cannon by the calculated angle
-					// boat.transform.rotation = Quaternion.Euler(-angle, 0, 0);
-				} else {
-					//gamma/alpha rotation of the cannon
-					// boat.transform.rotation = Quaternion.Euler(-angle, PhysicsCalculator.toDegrees(gamma), 0);
-				}
-			}
+			// 	if (xDifference == 0) {
+			// 		//rotates the cannon by the calculated angle
+			// 		// boat.transform.rotation = Quaternion.Euler(-angle, 0, 0);
+			// 	} else {
+			// 		//gamma/alpha rotation of the cannon
+			// 		// boat.transform.rotation = Quaternion.Euler(-angle, PhysicsCalculator.toDegrees(gamma), 0);
+			// 	}
+			// }
 
-			angle = PhysicsCalculator.calculateTheta(range, gunBallVelocity) * 180 / Mathf.PI;
+			// angle = PhysicsCalculator.calculateTheta(range, gunBallVelocity) * 180 / Mathf.PI;
 
 			//run lab 4
 			// newVx = PhysicsCalculator.calculateVelocity(oldVx, 0, fixedTime);
 			// newVy = PhysicsCalculator.calculateYVelocityGamma(oldVy, -ACCELERATION, fixedTime);
-			newVz = PhysicsCalculator.calculateVelocity(oldVz, 0, fixedTime);
+			// newVz = PhysicsCalculator.calculateVelocity(oldVz, 0, fixedTime);
 
 			// newDx = PhysicsCalculator.calculateXPosition(currentDx, oldVx, angle, gamma, fixedTime);
 			// newDy = PhysicsCalculator.calculateYPosition(currentDy, oldVy, -ACCELERATION, fixedTime);
 			// newDz = PhysicsCalculator.calculateZPosition(oldDz, oldVz, angle, PhysicsCalculator.toDegrees(gamma), fixedTime);
+
 
 			if (Mathf.Abs(gunball.transform.position.z - target.transform.position.z) < 1 && numUpdates > 0 && !collided) {
 				pause();
 				timeText.text = "Time: " + ((numUpdates + 1) * fixedTime) + " seconds";
 			} else {
 
-				if (xDifference == 0) {
-					gunball.transform.Translate(gunball.transform.position.x, gunball.transform.position.y, newVx * fixedTime);
+				if (!collided) {
+					gunball.transform.Translate(gunball.transform.position.x, gunball.transform.position.y, gunBallVelocity * fixedTime);
+					target.transform.Translate(0, 0, targetVelocity * fixedTime);
 				} else {
+					gunball.transform.Translate(bulletXFinal * fixedTime, gunball.transform.position.y, bulletZfinal * fixedTime);
+					target.transform.Translate(targetXFinal * fixedTime, target.transform.position.y, targetZfinal * fixedTime);
 
-					if (!collided) {
-						gunball.transform.Translate(gunball.transform.position.x, gunball.transform.position.y, gunBallVelocity * fixedTime);
-						target.transform.Translate(0, 0, targetVelocity * fixedTime);
-					} else {
-						gunball.transform.Translate(bulletXFinal * fixedTime, gunball.transform.position.y, bulletZfinal * fixedTime);
-						target.transform.Translate(targetXFinal * fixedTime, target.transform.position.y, targetZfinal * fixedTime);
-					}
+					gunball.transform.Rotate(omegaBallF * Mathf.Rad2Deg * fixedTime);
+					target.transform.Rotate(omegaTargetF * Mathf.Rad2Deg * fixedTime);
+
 				}
 
-				if (lastMarker + buffer < numUpdates) {
+				if (lastMarker + buffer < numUpdates && moving) {
 					lastMarker = numUpdates;
 					Object.Instantiate(flightMarker, new Vector3(gunball.transform.position.x, gunball.transform.position.y + yDisplacement, gunball.transform.position.z + zDisplacement), Quaternion.identity);
 				}
@@ -265,6 +274,12 @@ public class Lab11: MonoBehaviour {
 		moving = !moving;
 		collided = true;
 
+		P.z = target.transform.position.z - 0.5f;
+		P.x = gunball.transform.position.x + (target.transform.position.x - gunball.transform.position.x) / 2;
+
+		//reposition the cube
+		gunball.transform.position = new Vector3(gunball.transform.position.x, gunball.transform.position.y, target.transform.position.z - 1);
+
 		//react to the collision
 		gunBallVelocityFinal = PhysicsCalculator.calculateRecoilVelocity(jImpulse, projMass, gunBallVelocity);
 		targetVelocityFinal  = PhysicsCalculator.calculateRecoilVelocity(-jImpulse, targetMass, targetVelocity);
@@ -273,17 +288,33 @@ public class Lab11: MonoBehaviour {
 		normals.x = target.transform.position.x - gunball.transform.position.x;
 		normals.z = target.transform.position.z - gunball.transform.position.z;
 
+		//lab #11 additions
+		lowCaseR1 = PhysicsCalculator.calculateSubtractVector(P, gunball.transform.position);
+		lowCaseR2 = PhysicsCalculator.calculateSubtractVector(P, target.transform.position);
+
+		//hacky fix :)
+		normals.x = 0;
+		tangentials.z = normals.x;
+		//--------------------------------
+
+		jImpulse = PhysicsCalculator.calculateJImpulse((gunBallVelocity - targetVelocity), e, projMass, targetMass, normals, lowCaseR1, lowCaseR2, moi1, moi2);
+
+		omegaBallF = -(omegaBallI + Vector3.Cross(lowCaseR1, (normals * jImpulse)) / moi1);
+		omegaTargetF = omegaTargetI + Vector3.Cross(lowCaseR2, (normals * jImpulse)) / moi2;
+
+		//Lab #10
 		jNormal = (jImpulse * normals.z) + (0 * normals.x);
 
 		tangentials.z = normals.x * -1;
 		tangentials.x = normals.z;
-
+ 
 		bulletinitialNormal = (gunBallVelocity * normals.z) + (0 * normals.x);
 		bulletinitialTang = (gunBallVelocity * tangentials.z) + (0 * tangentials.x);
 
 		targetinitialNormal = (targetVelocity * normals.z) + (0 * normals.x);
 		targetinitialTang = (targetVelocity * tangentials.z) + (0 * tangentials.z);
 
+		//final normals
 		bulletZfinalNormal = (jNormal / projMass + bulletinitialNormal) * normals.z;
 		bulletZfinalTang = (bulletinitialTang * tangentials.z);
 
@@ -339,9 +370,21 @@ public class Lab11: MonoBehaviour {
 		energyFinalX.y = 0.5f * targetMass * targetXFinal * targetXFinal;
 		energyFinalX.z = energyFinalX.x + energyFinalX.y;
 
-		totalEnergy = energyFinalX.z + energyFinalZ.z;
+		totalEnergy = energyFinalZ.z + (0.5f * moi1 * omegaBallF.y * omegaBallF.y) + (0.5f * moi2 * omegaTargetF.y * omegaTargetF.y);
 
-		//lab #11 additions
+		//gunball momentum values
+		Vector3 gunballInitialMomentum = new Vector3(momentumInitialX.x, 0.0f, momentumInitialZ.x);
+		Vector3 gunballFinalMomentum = new Vector3(0.0f, 0.0f, momentumFinalZ.x);
 
+		//target momentum values
+		Vector3 targetInitialMomentum = new Vector3(momentumInitialX.y, 0.0f, momentumInitialZ.y);
+		Vector3 targetFinalMomentum = new Vector3(0.0f, 0.0f, momentumFinalZ.y);
+
+		LInitial = PhysicsCalculator.calculateAngularMomentum(lowCaseR1, lowCaseR2, gunballInitialMomentum, targetInitialMomentum);
+
+		LFinal1 = Vector3.Cross(lowCaseR1, gunballFinalMomentum) + (moi1 * omegaBallF);
+		LFinal2 = Vector3.Cross(lowCaseR2, targetFinalMomentum) + (moi2 * omegaTargetF);
+
+		LFinalTotal = LFinal1 + LFinal2;
 	}
 }

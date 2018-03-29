@@ -511,6 +511,10 @@ public class PhysicsCalculator : MonoBehaviour {
 		return P - R;
 	}
 
+	public static float calculateMOI(float mass) {
+		return (1 / (6 * mass) * (mass * mass));
+	}
+
 	public static float calculateOmegaFinal(float omegaI, Vector3 r, Vector3 jN, float I) {
 		// return omegaI + calculateCrossProd(r, jN) / I;
 		return 0.0f;
@@ -518,5 +522,28 @@ public class PhysicsCalculator : MonoBehaviour {
 
 	public static float calculateJImpulseWithRot(float vr, float e, float m1, float m2, float lCR1, float lCR2) {
 		return -vr * (e + 1) * (1 / (1 / m1 + 1 / m2 + lCR1 + lCR2));
+	}
+
+	public static Vector3 calculateSubtractVector(Vector3 v1, Vector3 v2) {
+		Vector3 temp;
+
+		temp.x = v1.x - v2.x;
+		temp.y = v1.y - v2.y;
+		temp.z = v1.z - v2.z;
+
+		return temp;
+	}
+
+	public static float calculateJImpulse(float vr, float e, float mass1, float mass2, Vector3 n, Vector3 r1, Vector3 r2, float moi1, float moi2) {
+		float jMass1 = Vector3.Dot(n, Vector3.Cross((Vector3.Cross(r1, n) / moi1), r1));
+		float jMass2 = Vector3.Dot(n, Vector3.Cross((Vector3.Cross(r2, n) / moi2), r2));
+
+		Debug.Log("Jmass1, Jmass2: " + jMass1 + ", " + jMass2);
+
+		return -vr * (e + 1) * (1 / ((1 / mass1) + (1 / mass2) + jMass1 + jMass2));
+	}
+
+	public static Vector3 calculateAngularMomentum(Vector3 r1, Vector3 r2, Vector3 p1, Vector3 p2) {
+		return Vector3.Cross(r1, p1) + Vector3.Cross(r2, p2);
 	}
 }

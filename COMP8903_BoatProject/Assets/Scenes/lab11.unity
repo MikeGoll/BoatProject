@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641234, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -203,7 +203,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4959977458189874, guid: 29d3d736b4a0e4ab1957f58fd1f7205e, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.3
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 4959977458189874, guid: 29d3d736b4a0e4ab1957f58fd1f7205e, type: 2}
       propertyPath: m_LocalPosition.y
@@ -211,7 +211,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4959977458189874, guid: 29d3d736b4a0e4ab1957f58fd1f7205e, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4959977458189874, guid: 29d3d736b4a0e4ab1957f58fd1f7205e, type: 2}
       propertyPath: m_LocalRotation.x
@@ -985,8 +985,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b852f84b8a53e4cacac8dec68aaffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lowCaseR1: 0
-  lowCaseR2: 0
+  P: {x: 0, y: 0, z: 0}
+  R1: {x: 0, y: 0, z: 0}
+  R2: {x: 0, y: 0, z: 0}
+  lowCaseR1: {x: 0, y: 0, z: 0}
+  lowCaseR2: {x: 0, y: 0, z: 0}
+  omegaBallI: {x: 0, y: 0, z: 0}
+  omegaTargetI: {x: 0, y: 0, z: 0}
+  omegaBallF: {x: 0, y: 0, z: 0}
+  omegaTargetF: {x: 0, y: 0, z: 0}
+  moi1: 0
+  moi2: 0
+  LInitial: {x: 0, y: 0, z: 0}
+  LFinal1: {x: 0, y: 0, z: 0}
+  LFinal2: {x: 0, y: 0, z: 0}
+  LFinalTotal: {x: 0, y: 0, z: 0}
   normals: {x: 0, y: 0, z: 0}
   tangentials: {x: 0, y: 0, z: 0}
   jNormal: 0
@@ -1018,7 +1031,7 @@ MonoBehaviour:
   targetXfinalTang: 0
   targetMass: 1
   targetVelocity: -5
-  projMass: 1
+  projMass: 2
   gunBallVelocity: 5
   gunBallVelocityFinal: 0
   e: 1
@@ -1040,8 +1053,8 @@ MonoBehaviour:
   newVy: 0
   newVz: 0
   boat: {fileID: 1376805313208356, guid: 74d370ff7ef714fdeb5df81e9840d4cd, type: 2}
-  target: {fileID: 1231202936067598, guid: 29d3d736b4a0e4ab1957f58fd1f7205e, type: 2}
-  gunball: {fileID: 1647099980378008, guid: f02e5f3b13ba443c39e3900148d67700, type: 2}
+  target: {fileID: 1453982293}
+  gunball: {fileID: 1254319294546522, guid: 1b9956f6eb7f0a04e965dd2586b419d0, type: 2}
   flightMarker: {fileID: 1139943970362762, guid: 73ee869c467484f689dd6abde92ef554,
     type: 2}
   updatesText: {fileID: 804393270}

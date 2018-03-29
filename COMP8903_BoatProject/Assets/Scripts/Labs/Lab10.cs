@@ -119,7 +119,7 @@ public class Lab10: MonoBehaviour {
 		gunBallSpawned = false;
 		initial = true;
 		lastMarker = numUpdates;
-		buffer = 3;
+		buffer = 5;
 		fixedTime = Time.fixedDeltaTime;
 
 		oldVz = gunBallVelocity;
@@ -166,9 +166,6 @@ public class Lab10: MonoBehaviour {
 		momentumInitial.x = PhysicsCalculator.calculateMomentum(projMass, gunBallVelocity);
 		momentumInitial.y = PhysicsCalculator.calculateMomentum(targetMass, targetVelocity);
 		momentumInitial.z = momentumInitial.x + momentumInitial.y;
-
-		//have this here to satisfy requirement of needing to show initial target velocity
-		Debug.Log("Target Initial Velocity: " + targetVelocity);
 	}
 	
 	// Update is called once per frame
@@ -271,6 +268,10 @@ public class Lab10: MonoBehaviour {
 	public void pause() {
 		moving = !moving;
 		collided = true;
+
+		float x = Mathf.Abs(gunball.transform.position.x - target.transform.position.x);
+		float z = Mathf.Sqrt(1 - Mathf.Pow(x, 2));
+		gunball.transform.position = new Vector3(gunball.transform.position.x, gunball.transform.position.y, target.transform.position.z - z);
 
 		//react to the collision
 		gunBallVelocityFinal = PhysicsCalculator.calculateRecoilVelocity(jImpulse, projMass, gunBallVelocity);
