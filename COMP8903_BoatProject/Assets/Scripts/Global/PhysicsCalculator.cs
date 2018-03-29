@@ -505,5 +505,18 @@ public class PhysicsCalculator : MonoBehaviour {
 
 // ------------------------------------------------- LAB #10 -------------------------------------------------
 
-	// public static float calculate
+// ------------------------------------------------- LAB #11 -------------------------------------------------
+
+	public static float calculateLowerCaseR(float P, float R) {
+		return P - R;
+	}
+
+	public static float calculateOmegaFinal(float omegaI, Vector3 r, Vector3 jN, float I) {
+		// return omegaI + calculateCrossProd(r, jN) / I;
+		return 0.0f;
+	}
+
+	public static float calculateJImpulseWithRot(float vr, float e, float m1, float m2, float lCR1, float lCR2) {
+		return -vr * (e + 1) * (1 / (1 / m1 + 1 / m2 + lCR1 + lCR2));
+	}
 }
