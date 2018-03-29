@@ -808,17 +808,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1231202936067598, guid: 29d3d736b4a0e4ab1957f58fd1f7205e,
     type: 2}
   m_PrefabInternal: {fileID: 263504514}
---- !u!114 &1453982299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1453982293}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32a034eb284cf45fda150ccaad217cfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1852846671
 GameObject:
   m_ObjectHideFlags: 0
@@ -985,6 +974,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b852f84b8a53e4cacac8dec68aaffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetMass: 1
+  targetVelocity: -5
+  targetVelocityFinal: 0
+  projMass: 2
+  gunBallVelocity: 5
+  gunBallVelocityFinal: 0
+  e: 1
   P: {x: 0, y: 0, z: 0}
   R1: {x: 0, y: 0, z: 0}
   R2: {x: 0, y: 0, z: 0}
@@ -1003,16 +999,17 @@ MonoBehaviour:
   normals: {x: 0, y: 0, z: 0}
   tangentials: {x: 0, y: 0, z: 0}
   jNormal: 0
+  jImpulse: 0
   energyInitialX: {x: 0, y: 0, z: 0}
   energyInitialZ: {x: 0, y: 0, z: 0}
   energyFinalX: {x: 0, y: 0, z: 0}
   energyFinalZ: {x: 0, y: 0, z: 0}
+  rotEnergy: {x: 0, y: 0, z: 0}
   totalEnergy: 0
   momentumInitialX: {x: 0, y: 0, z: 0}
   momentumInitialZ: {x: 0, y: 0, z: 0}
   momentumFinalX: {x: 0, y: 0, z: 0}
   momentumFinalZ: {x: 0, y: 0, z: 0}
-  targetVelocityFinal: 0
   bulletinitialNormal: 0
   bulletinitialTang: 0
   targetinitialNormal: 0
@@ -1029,29 +1026,6 @@ MonoBehaviour:
   bulletXfinalTang: 0
   targetXfinalNormal: 0
   targetXfinalTang: 0
-  targetMass: 1
-  targetVelocity: -5
-  projMass: 2
-  gunBallVelocity: 5
-  gunBallVelocityFinal: 0
-  e: 1
-  jImpulse: 0
-  momentumInitial: {x: 0, y: 0, z: 0}
-  momentumFinal: {x: 0, y: 0, z: 0}
-  dragCoefficient: 0
-  tau: 0
-  windVelocity: 0
-  windCoefficient: 0
-  gamma: 0
-  gammaDegrees: 0
-  angle: 0
-  angleAdjusted: 0
-  newDx: 0
-  newDy: 0
-  newDz: 0
-  newVx: 0
-  newVy: 0
-  newVz: 0
   boat: {fileID: 1376805313208356, guid: 74d370ff7ef714fdeb5df81e9840d4cd, type: 2}
   target: {fileID: 1453982293}
   gunball: {fileID: 1254319294546522, guid: 1b9956f6eb7f0a04e965dd2586b419d0, type: 2}
