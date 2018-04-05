@@ -203,7 +203,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4959977458189874, guid: 29d3d736b4a0e4ab1957f58fd1f7205e, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.75
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 4959977458189874, guid: 29d3d736b4a0e4ab1957f58fd1f7205e, type: 2}
       propertyPath: m_LocalPosition.y
@@ -974,11 +974,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b852f84b8a53e4cacac8dec68aaffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetMass: 1
-  targetVelocity: -5
+  targetMass: 2
+  targetVelocity: -4
   targetVelocityFinal: 0
   projMass: 2
-  gunBallVelocity: 5
+  gunBallVelocity: 4
   gunBallVelocityFinal: 0
   e: 1
   P: {x: 0, y: 0, z: 0}
