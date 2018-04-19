@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641234, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -251,11 +251,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4069058809207492, guid: 6c0f77bc49853406f9ee496bd25b3b54, type: 2}
       propertyPath: m_LocalScale.x
-      value: 40
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4069058809207492, guid: 6c0f77bc49853406f9ee496bd25b3b54, type: 2}
       propertyPath: m_LocalScale.z
-      value: 40
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6c0f77bc49853406f9ee496bd25b3b54, type: 2}
@@ -442,6 +442,16 @@ Prefab:
       propertyPath: m_LocalPosition.x
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 23605192967217708, guid: 74d370ff7ef714fdeb5df81e9840d4cd,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23871417115558270, guid: 74d370ff7ef714fdeb5df81e9840d4cd,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114119392378996886, guid: 74d370ff7ef714fdeb5df81e9840d4cd, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 74d370ff7ef714fdeb5df81e9840d4cd, type: 2}
@@ -520,15 +530,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dynamicControls: 1
-  dragCoefficient: 500
+  dragCoefficient: 800
   tau: 1
   vMax: 0
   accelerationWithDrag: 0
-  angularForce: 200
-  angle: 45
+  angularForce: 0
+  angle: 0
   force: 0
-  omegaTV: 0
+  oMax: 0
+  oldOmega: 0
   omega: 0
+  turnForce: 0
   thrust: {x: 0, y: 0, z: 0}
   thrustAngle: {x: 0, y: 0, z: 0}
   rLeft: {x: 0, y: 0, z: 0}
