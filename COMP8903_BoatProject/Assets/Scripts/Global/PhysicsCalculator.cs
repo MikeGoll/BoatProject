@@ -552,11 +552,15 @@ public class PhysicsCalculator : MonoBehaviour {
 		return ((tau - dragCoefficient * onext) / mass);
 	}
 
-	public static float calculateAngularVelocityWithDrag(float omax, float dragCoefficient, float oi, float tau, float mass) {
-		return omax - Mathf.Pow(EXP, (-dragCoefficient) * tau / mass) * (omax - oi);
+	public static float calculateAngularVelocityWithDrag(float omax, float dragCoefficient, float oi, float time, float mass) {
+		return omax - Mathf.Pow(EXP, (-dragCoefficient) * time / mass) * (omax - oi);
 	}
 
 	public static float calculateAngularPositionWithDrag(float preTheta, float omega, float dragConst, float time, float com, float vi) {
 		return preTheta + (omega / dragConst * time) + ((omega - dragConst * vi) / dragConst * com / dragConst * (Mathf.Pow(EXP, (-dragConst) * time / com) - 1) );
+	}
+
+	public static float calculateTerminalAngularVelocity(float tau, float drag) {
+		return (tau / drag);
 	}
 }

@@ -521,12 +521,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dynamicControls: 1
   dragCoefficient: 500
-  tau: 0
+  tau: 1
   vMax: 0
   accelerationWithDrag: 0
   angularForce: 200
   angle: 45
   force: 0
+  omegaTV: 0
+  omega: 0
   thrust: {x: 0, y: 0, z: 0}
   thrustAngle: {x: 0, y: 0, z: 0}
   rLeft: {x: 0, y: 0, z: 0}

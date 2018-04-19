@@ -24,6 +24,11 @@ public class Final : MonoBehaviour {
 
 	[Header("Lab 6 Calculated")]
 	public float force;
+	[Header("Final Calculated")]
+	public float oMax;
+	public float oldOmega, omega;
+	public float turnForce;
+	private int direction;
 	// public float dinZ;
 	// public float lD;
 	// public float rD;
@@ -132,7 +137,7 @@ public class Final : MonoBehaviour {
 ----------------------------------------------------------------------------------------------------------------------*/
 	void Start () {
 		//------- LAB #6 Additions -------
-		moving = false;
+		moving = true;
 		initial = true;
 		numUpdates = 0;
 		fixedTime = Time.fixedDeltaTime;
@@ -171,7 +176,6 @@ public class Final : MonoBehaviour {
 
 		if (Input.GetKeyDown(KeyCode.W)) {
 			force = 4000;
-			moving = true;
 		}
 
 		if (Input.GetKeyUp(KeyCode.W) && dynamicControls) {
@@ -181,16 +185,24 @@ public class Final : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.Q)) {
 			rotLeft = true;
 			rotRight = false;
+
+			turnForce = 40000;
+			direction = -1;
 		}
 
 		if (Input.GetKeyDown(KeyCode.E)) {
 			rotRight = true;
 			rotLeft = false;
+
+			turnForce = 40000;
+			direction = 1;
 		}
 
 		if (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Q)) {
 			rotRight = false;
 			rotLeft = false;
+
+			turnForce = 0;
 		}
 
 		if (initial) {
@@ -249,27 +261,13 @@ public class Final : MonoBehaviour {
 			newDz = PhysicsCalculator.calculateDistance(oldDz, acceleration.z, oldVz, Time.fixedDeltaTime);
 			newVz = PhysicsCalculator.calculateVelocity(oldVz, acceleration.z, Time.fixedDeltaTime);
 
-
-			if (rotLeft) {
-				temp1 = accelerationL;
-			}
-
-			if (rotRight) {
-				temp1 = accelerationR;
-			}
-
 			angularVelocity = oldAngularVelocity + (temp1 * fixedTime);
 
 			angularDisplacement += Mathf.Abs(angularVelocity * fixedTime);
 
-			
-			// //update the position of the boat
-			// // totalBoat.transform.position = new Vector3(totalBoat.transform.position.x + newVx * fixedTime, totalBoat.transform.position.y, totalBoat.transform.position.z + newVz * fixedTime);
-			// totalBoat.transform.Translate(newVx * fixedTime, 0, newVz * fixedTime);
-			// 
-
 			distanceX += newVx * fixedTime;
 			distanceZ += newVz * fixedTime;
+
 
 			//------- LAB #7 Additions -------
 			tau = PhysicsCalculator.calculateTau(mass_com, dragCoefficient);
@@ -282,12 +280,10 @@ public class Final : MonoBehaviour {
 
 			totalBoat.transform.Translate(newVx * fixedTime, 0, newVz * fixedTime);
 
-			if (rotRight) {
-				totalBoat.transform.Rotate(0, -temp1, 0, Space.Self);
-			} else if (rotLeft) {
-				totalBoat.transform.Rotate(0, temp1, 0, Space.Self);
-			}
-			
+			oMax = PhysicsCalculator.calculateTerminalAngularVelocity(turnForce, dragCoefficient);
+			omega = PhysicsCalculator.calculateAngularVelocityWithDrag(oMax, dragCoefficient, oldOmega, fixedTime, mass_com);
+
+			totalBoat.transform.Rotate(0, direction * omega * fixedTime, 0, Space.Self);
 		}
 
 		if (moving) {
@@ -306,6 +302,8 @@ public class Final : MonoBehaviour {
 			oldDz = newDz;
 			oldVz = newVz;
 			oldAngularVelocity = angularVelocity;
+
+			oldOmega = omega;
 
 		} else {
 			v_final = oldVz;
