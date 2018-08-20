@@ -171,7 +171,7 @@ The lab calculates:
 ![(Lab 6 Screenshot)](Images/lab6.png)
 
 ---
-(#lab-7)
+
 ###Lab 7: Dynamic Drag
 _Lab 7_ simulates a dynamic drag coefficient which causes the boat to slow down from an initial velocity.
 
