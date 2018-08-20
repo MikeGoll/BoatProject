@@ -19,17 +19,17 @@ The project is broken up into 12 pieces--each presenting a different scenario.
 Unity 2017 was used in order to render the simulation. It is also used to keep consistent time steps throughout all simulations and keep track of the world coordinates for objects. **All physics calculations are done manually and the results are applied to the world.**
 
 ##### Labs
-  - [Lab 1: Composite Object Calculations](# Lab-1)
-  - [Lab 2: Linear Motion](# Lab-2)
-  - [Lab 3: Basic Projectile Motion](# Lab-3)
-  - [Lab 4: Regular Projectile Motion](# Lab-4)
+  - [Lab 1 Composite Object Calculations](#lab-1-composite-object-calculations)
+  - [Lab 2: Linear Motion](#lab-2)
+  - [Lab 3: Basic Projectile Motion](#lab-3)
+  - [Lab 4: Regular Projectile Motion](#lab-4)
   - [Lab 5: Advanced Projectile Motion](# Lab-5)
-  - [Lab 6: Basic Forces](# Lab-6)
-  - [Lab 7: Dynamic Drag](# Lab-7)
-  - [Lab 8: 3-D Projectile Drag](# Lab-8)
-  - [Lab 9: Linear Projectile Collision](# Lab-9)
-  - [Lab 10: Angular Projectile Collision](# Lab-10)
-  - [Lab 11: Projectile Collision with Rotations](# Lab-11)
+  - [Lab 6: Basic Forces](#lab-6)
+  - [Lab 7: Dynamic Drag](#lab-7)
+  - [Lab 8: 3-D Projectile Drag](#lab-8)
+  - [Lab 9: Linear Projectile Collision](#lab-9)
+  - [Lab 10: Angular Projectile Collision](#lab-10)
+  - [Lab 11: Projectile Collision with Rotations](#lab-11)
   - [Final Lab: Open World Physics](#final-lab)
 
 ---
@@ -337,7 +337,7 @@ The lab calculates:
 
 ---
 
-###Final Lab: Open World Physics
+### Final Lab: Open World Physics
 The _Final Lab_ gives the user complete control of the boat, allowing the user to pilot the boat around the game world.
 
 The boat will accelerate until it reaches its terminal velocity and decelerate using drag forces as well as steer using a rudder-style control scheme. There are no objects to collide with.
