@@ -19,18 +19,18 @@ The project is broken up into 12 pieces--each presenting a different scenario.
 Unity 2017 was used in order to render the simulation. It is also used to keep consistent time steps throughout all simulations and keep track of the world coordinates for objects. **All physics calculations are done manually and the results are applied to the world.**
 
 ##### Labs
-  - [Lab 1 Composite Object Calculations](#lab-1-composite-object-calculations)
+  - [Lab 1: Composite Object Calculations](#lab-1-composite-object-calculations)
   - [Lab 2: Linear Motion](#lab-2-linear-motion)
-  - [Lab 3: Basic Projectile Motion](#lab-3)
-  - [Lab 4: Regular Projectile Motion](#lab-4)
-  - [Lab 5: Advanced Projectile Motion](# Lab-5)
-  - [Lab 6: Basic Forces](#lab-6)
-  - [Lab 7: Dynamic Drag](#lab-7)
-  - [Lab 8: 3-D Projectile Drag](#lab-8)
-  - [Lab 9: Linear Projectile Collision](#lab-9)
-  - [Lab 10: Angular Projectile Collision](#lab-10)
-  - [Lab 11: Projectile Collision with Rotations](#lab-11)
-  - [Final Lab: Open World Physics](#final-lab)
+  - [Lab 3: Basic Projectile Motion](#lab-3-basic-projectile-motion)
+  - [Lab 4: Regular Projectile Motion](#lab-4-regular-projectile-motion)
+  - [Lab 5: Advanced Projectile Motion](#lab-5-advanced-projectile-motion)
+  - [Lab 6: Basic Forces](#lab-6-basic-forces)
+  - [Lab 7: Dynamic Drag](#lab-7-dynamic-drag)
+  - [Lab 8: 3D Projectile Drag](#lab-8-3d-projectile-drag)
+  - [Lab 9: Linear Projectile Collision](#lab-9-linear-projectile-collision)
+  - [Lab 10: Angular Projectile Collision](#lab-10-angular-projectile-collision)
+  - [Lab 11: Projectile Collision with Rotations](#lab-11-projectile-collision-with-rotations)
+  - [Final Lab: Open World Physics](#final-lab-open-world-physics)
 
 ---
 
@@ -203,8 +203,8 @@ The lab calculates:
 
 ---
 
-### Lab 8: 3-D Projectile Drag
-_Lab 8_ simulates the 3-D projectile launch with the two forces, _wind_ and _drag_, acting upon it.
+### Lab 8: 3D Projectile Drag
+_Lab 8_ simulates the 3D projectile launch with the two forces, _wind_ and _drag_, acting upon it.
 
 The cannonball/projectile will stop 0.05 units above the water.
 
