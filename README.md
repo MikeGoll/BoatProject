@@ -2,7 +2,7 @@
 
 *By Michael Goll*
 
-######Technology Used:
+###### Technology Used:
   - Language: **C#**
   - Engine: **Unity 2017**
 
@@ -15,26 +15,26 @@ Each component has its own unique characteristics such as weight, dimensions, an
 
 The project is broken up into 12 pieces--each presenting a different scenario.
 
-######Usage of Unity 2017
+###### Usage of Unity 2017
 Unity 2017 was used in order to render the simulation. It is also used to keep consistent time steps throughout all simulations and keep track of the world coordinates for objects. **All physics calculations are done manually and the results are applied to the world.**
 
-#####Labs
-  - [Lab 1: Composite Object Calculations](#lab-1)
-  - [Lab 2: Linear Motion](#lab-2)
-  - [Lab 3: Basic Projectile Motion](#lab-3)
-  - [Lab 4: Regular Projectile Motion](#lab-4)
-  - [Lab 5: Advanced Projectile Motion](#lab-5)
-  - [Lab 6: Basic Forces](#lab-6)
-  - [Lab 7: Dynamic Drag](#lab-7)
-  - [Lab 8: 3-D Projectile Drag](#lab-8)
-  - [Lab 9: Linear Projectile Collision](#lab-9)
-  - [Lab 10: Angular Projectile Collision](#lab-10)
-  - [Lab 11: Projectile Collision with Rotations](#lab-11)
+##### Labs
+  - [Lab 1: Composite Object Calculations](# Lab-1)
+  - [Lab 2: Linear Motion](# Lab-2)
+  - [Lab 3: Basic Projectile Motion](# Lab-3)
+  - [Lab 4: Regular Projectile Motion](# Lab-4)
+  - [Lab 5: Advanced Projectile Motion](# Lab-5)
+  - [Lab 6: Basic Forces](# Lab-6)
+  - [Lab 7: Dynamic Drag](# Lab-7)
+  - [Lab 8: 3-D Projectile Drag](# Lab-8)
+  - [Lab 9: Linear Projectile Collision](# Lab-9)
+  - [Lab 10: Angular Projectile Collision](# Lab-10)
+  - [Lab 11: Projectile Collision with Rotations](# Lab-11)
   - [Final Lab: Open World Physics](#final-lab)
 
 ---
 
-###Lab 1: Composite Object Calculations
+### Lab 1: Composite Object Calculations
 _Lab 1_ consists of very basic physics calculations of a composite object. The total boat consists of the hull, the pilot and the cannon.
 
 The lab calculates the following:
@@ -46,7 +46,7 @@ The lab calculates the following:
 
 The boat can be moved around the world using the **W, A, S, and D** keys. The values are calculated real-time and recalculate accordingly.
 
-######User Input
+###### User Input
 | Key | Function |
 | :------------- | :------------- |
 | W | Move Forwards |
@@ -62,14 +62,14 @@ The boat can be moved around the world using the **W, A, S, and D** keys. The va
 
 ---
 
-###Lab 2: Linear Motion
+### Lab 2: Linear Motion
 
 _Lab 2_ simulates the boat under either a constant acceleration or a constant drag.
 
 It calculates:
   - Final position of the boat/object after a given time interval.
 
-######User Input
+###### User Input
 | Key | Function |
 | :------------- | :------------- |
 | Use Drag (toggle) | Whether or not the simulation uses the **drag constant** to slow the boat/object down. |
@@ -81,7 +81,7 @@ It calculates:
 
 ---
 
-###Lab 3: Basic Projectile Motion
+### Lab 3: Basic Projectile Motion
 
 _Lab 3_ simulates a projectile fired from the rear-mounted cannon on the boat as it hits a target.
 
@@ -94,7 +94,7 @@ The cannonball/projectile will stop when the Y position is less that 0.05 units 
 
 The simulation is basic here as the **target always remains in a linear path from the boat** (ie. the target is always directly in-front or directly behind the boat).
 
-######Data Input
+###### Data Input
 | Inspector Name | Description |
 | :------------- | :------------- |
 | Gun Ball Velocity | Velocity of the cannonball/projectile as it leaves the cannon. |
@@ -104,7 +104,7 @@ The simulation is basic here as the **target always remains in a linear path fro
 
 ---
 
-###Lab 4: Regular Projectile Motion
+### Lab 4: Regular Projectile Motion
 
 _Lab 4_ builds onto Lab 3 so that the target can now be to either side of the boat, as well as in front or behind.
 
@@ -114,7 +114,7 @@ The lab calculates the following:
 
 The cannonball/projectile will stop when the Y position is less that 0.05 units from the water.
 
-######Data Input
+###### Data Input
 | Inspector Name | Description |
 | :------------- | :------------- |
 | Gun Ball Velocity | Velocity of the cannonball/projectile as it leaves the cannon. |
@@ -123,7 +123,7 @@ The cannonball/projectile will stop when the Y position is less that 0.05 units 
 
 ---
 
-###Lab 5: Advanced Projectile Motion
+### Lab 5: Advanced Projectile Motion
 _Lab 5_ fires a projectile from the rear-mounted cannon towards a target as well as tracks the rotation of the projectile when backspin is applied to it. It draws the path of the small sphere on the projectile which tracks the spin.
 
 The lab calculates the following:
@@ -133,7 +133,7 @@ The lab calculates the following:
 
 The cannonball/projectile will stop when the Y position is less that 0.05 units from the water.
 
-######Data Input
+###### Data Input
 | Inspector Name | Description |
 | :------------- | :------------- |
 | Gun Ball Velocity | Velocity of the cannonball/projectile as it leaves the cannon. |
@@ -147,7 +147,7 @@ The cannonball/projectile will stop when the Y position is less that 0.05 units 
 
 ---
 
-###Lab 6: Basic Forces
+### Lab 6: Basic Forces
 _Lab 6_ simulates what happens when a constant force is applied through the direct center of mass of the composite object.
 
 The lab does two scenarios--one linear and one angular. The linear scenario applies the force in a linear line whereas the angular scenario creates an angular acceleration using the user-given force.
@@ -157,7 +157,7 @@ The lab calculates:
   - Position in world-space the object is.
   - Angular displacement of the object.
 
-######Data Input
+###### Data Input
 | Inspector Name | Description |
 | :------------- | :------------- |
 | Force | Strength of the force applied to the boat/object. The higher the number, the stronger the force. |
@@ -172,7 +172,7 @@ The lab calculates:
 
 ---
 
-###Lab 7: Dynamic Drag
+### Lab 7: Dynamic Drag
 _Lab 7_ simulates a dynamic drag coefficient which causes the boat to slow down from an initial velocity.
 
 It also has a toggle for _dynamic controls_ which allows the user to apply a force until the boat reaches its maximum velocity. Releasing the key stops applying the force and the boat decelerates until it stops. Otherwise, the force is applied initially and the boat/object decelerates until it stops.
@@ -184,7 +184,7 @@ The lab calculates:
   - Thrust and Torque.
   - Distance and Velocity.
 
-######Data Input
+###### Data Input
 | Inspector Name | Description |
 | :------------- | :------------- |
 | Dynamic Controls (toggle)| Whether or not the program will use user input for applying the force. |
@@ -192,7 +192,7 @@ The lab calculates:
 | Angular Force | How strong the force acting on the boat/object from an angle is. |
 | Angle | The angle in which the force is applied (in degrees). |
 
-######User Input
+###### User Input
 | Key | Function |
 | :------------- | :------------- |
 | Space | Start/Stop Simulation |
@@ -203,7 +203,7 @@ The lab calculates:
 
 ---
 
-###Lab 8: 3-D Projectile Drag
+### Lab 8: 3-D Projectile Drag
 _Lab 8_ simulates the 3-D projectile launch with the two forces, _wind_ and _drag_, acting upon it.
 
 The cannonball/projectile will stop 0.05 units above the water.
@@ -216,14 +216,14 @@ The lab calculates:
   - Alpha and Gamma angles (in both degrees and radians).
   - Distance and velocity of the projectile.
 
-######Data Input
+###### Data Input
 | Inspector Name | Description |
 | :------------- | :------------- |
 | Drag Coefficient | How strong the drag force acting upon the cannonball/projectile is. Higher number is stronger. |
 | Proj Mass | Mass of the projectile. |
 | Gun Ball Velocity | Velocity of the cannonball/projectile as it leaves the cannon. |
 
-######User Input
+###### User Input
 | Key | Function |
 | :------------- | :------------- |
 | Space | Start Simulation |
@@ -232,7 +232,7 @@ The lab calculates:
 
 ---
 
-###Lab 9: Linear Projectile Collision
+### Lab 9: Linear Projectile Collision
 _Lab 9_ simulates the projectile being launched linearly into a moving target. The target is always in-front of the boat and either moves towards the boat or away from the boat.
 
 Detects moment of impact and calculates the velocity of both the projectile and the target, preserving momentum.
@@ -245,7 +245,7 @@ The lab calculates:
   - Momentum
   - Drag on the projectile.
 
-######Data Input
+###### Data Input
 | Inspector Name | Description |
 | :------------- | :------------- |
 | Target Mass | Mass of the target. |
@@ -253,7 +253,7 @@ The lab calculates:
 | Gun Ball Velocity | Velocity of the cannonball/projectile as it leaves the cannon. |
 | E | Restitution Coefficient; Determines whether or not the objects stick together or bounce off after impact. Value between 0 and 1. |
 
-######User Input
+###### User Input
 | Key | Function |
 | :------------- | :------------- |
 | Space | Start/Stop/Resume Simulation |
@@ -266,7 +266,7 @@ The lab calculates:
 
 ---
 
-###Lab 10: Angular Projectile Collision
+### Lab 10: Angular Projectile Collision
 _Lab 10_ simulates the projectile being launched  into a moving target, reacting at an angle.
 
 Detects moment of impact and calculates the velocity of both the projectile and the target, as well as the angle in which it will travel all while preserving momentum.
@@ -280,7 +280,7 @@ The lab calculates:
   - Drag on the projectile.
   - Reaction angle of both objects.
 
-######Data Input
+###### Data Input
 | Inspector Name | Description |
 | :------------- | :------------- |
 | Target Mass | Mass of the target. |
@@ -289,7 +289,7 @@ The lab calculates:
 | Gun Ball Velocity | Velocity of the cannonball/projectile as it leaves the cannon. |
 | E | Restitution Coefficient; Determines whether or not the objects stick together or bounce off after impact. Value between 0 and 1. |
 
-######User Input
+###### User Input
 | Key | Function |
 | :------------- | :------------- |
 | Space | Start/Stop/Resume Simulation |
@@ -300,7 +300,7 @@ The lab calculates:
 **After Collision:**
 ![(Lab 10 Screenshot)](Images/lab10a.png)
 
-###Lab 11: Projectile Collision with Rotations
+### Lab 11: Projectile Collision with Rotations
 _Lab 11_ simulates two cube-shaped projectiles being fired into one another. Both objects collide with a flat side, causing them to spin.
 
 Detects moment of impact and calculates the velocity of both the projectile and the target, the angle in which it will travel, speed of the spin after colliding and momentum preservation.
@@ -315,7 +315,7 @@ The lab calculates:
   - Reaction angle of both objects.
   - Spin of both objects.
 
-######Data Input
+###### Data Input
 | Inspector Name | Description |
 | :------------- | :------------- |
 | Target Mass | Mass of the target. |
@@ -324,7 +324,7 @@ The lab calculates:
 | Gun Ball Velocity | Velocity of the cannonball/projectile as it leaves the cannon. |
 | E | Restitution Coefficient; Determines whether or not the objects stick together or bounce off after impact. Value between 0 and 1. |
 
-######User Input
+###### User Input
 | Key | Function |
 | :------------- | :------------- |
 | Space | Start/Stop/Resume Simulation |
@@ -348,12 +348,12 @@ The lab calculates:
   - Real-time acceleration of the boat.
   - Real-time distance travelled.
 
-######Data Input
+###### Data Input
 | Inspector Name | Description |
 | :------------- | :------------- |
 | Drag Coefficient | How strong the drag force acting upon the boat/object is. Higher number is stronger. |
 
-######User Input
+###### User Input
 | Key | Function |
 | :------------- | :------------- |
 | Space | Start/Stop/Resume Simulation |
