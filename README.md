@@ -20,7 +20,7 @@ Unity 2017 was used in order to render the simulation. It is also used to keep c
 
 ##### Labs
   - [Lab 1 Composite Object Calculations](#lab-1-composite-object-calculations)
-  - [Lab 2: Linear Motion](#lab-2)
+  - [Lab 2: Linear Motion](#lab-2-linear-motion)
   - [Lab 3: Basic Projectile Motion](#lab-3)
   - [Lab 4: Regular Projectile Motion](#lab-4)
   - [Lab 5: Advanced Projectile Motion](# Lab-5)
