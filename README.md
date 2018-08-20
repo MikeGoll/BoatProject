@@ -18,7 +18,7 @@ The project is broken up into 12 pieces--each presenting a different scenario.
 ######Usage of Unity 2017
 Unity 2017 was used in order to render the simulation. It is also used to keep consistent time steps throughout all simulations and keep track of the world coordinates for objects. **All physics calculations are done manually and the results are applied to the world.**
 
-######Labs
+#####Labs
   - [Lab 1: Composite Object Calculations](#lab-1)
   - [Lab 2: Linear Motion](#lab-2)
   - [Lab 3: Basic Projectile Motion](#lab-3)
@@ -34,7 +34,7 @@ Unity 2017 was used in order to render the simulation. It is also used to keep c
 
 ---
 
-######Lab #1: (#lab-1) Composite Object Calculations
+###Lab 1: Composite Object Calculations
 _Lab 1_ consists of very basic physics calculations of a composite object. The total boat consists of the hull, the pilot and the cannon.
 
 The lab calculates the following:
@@ -62,7 +62,7 @@ The boat can be moved around the world using the **W, A, S, and D** keys. The va
 
 ---
 
-######Lab #2: (#lab-2) Linear Motion
+###Lab 2: Linear Motion
 
 _Lab 2_ simulates the boat under either a constant acceleration or a constant drag.
 
@@ -81,7 +81,7 @@ It calculates:
 
 ---
 
-######Lab #3: (#lab-3) Basic Projectile Motion
+###Lab 3: Basic Projectile Motion
 
 _Lab 3_ simulates a projectile fired from the rear-mounted cannon on the boat as it hits a target.
 
@@ -104,7 +104,7 @@ The simulation is basic here as the **target always remains in a linear path fro
 
 ---
 
-######Lab #4: (#lab-4) Regular Projectile Motion
+###Lab 4: Regular Projectile Motion
 
 _Lab 4_ builds onto Lab 3 so that the target can now be to either side of the boat, as well as in front or behind.
 
@@ -123,7 +123,7 @@ The cannonball/projectile will stop when the Y position is less that 0.05 units 
 
 ---
 
-######Lab #5: (#lab-5) Advanced Projectile Motion
+###Lab 5: Advanced Projectile Motion
 _Lab 5_ fires a projectile from the rear-mounted cannon towards a target as well as tracks the rotation of the projectile when backspin is applied to it. It draws the path of the small sphere on the projectile which tracks the spin.
 
 The lab calculates the following:
@@ -147,7 +147,7 @@ The cannonball/projectile will stop when the Y position is less that 0.05 units 
 
 ---
 
-######Lab #6: (#lab-6) Basic Forces
+###Lab 6: Basic Forces
 _Lab 6_ simulates what happens when a constant force is applied through the direct center of mass of the composite object.
 
 The lab does two scenarios--one linear and one angular. The linear scenario applies the force in a linear line whereas the angular scenario creates an angular acceleration using the user-given force.
@@ -171,8 +171,8 @@ The lab calculates:
 ![(Lab 6 Screenshot)](Images/lab6.png)
 
 ---
-
-######Lab #7: (#lab-7) Dynamic Drag
+(#lab-7)
+###Lab 7: Dynamic Drag
 _Lab 7_ simulates a dynamic drag coefficient which causes the boat to slow down from an initial velocity.
 
 It also has a toggle for _dynamic controls_ which allows the user to apply a force until the boat reaches its maximum velocity. Releasing the key stops applying the force and the boat decelerates until it stops. Otherwise, the force is applied initially and the boat/object decelerates until it stops.
@@ -203,7 +203,7 @@ The lab calculates:
 
 ---
 
-######Lab #8: (#lab-8) 3-D Projectile Drag
+###Lab 8: 3-D Projectile Drag
 _Lab 8_ simulates the 3-D projectile launch with the two forces, _wind_ and _drag_, acting upon it.
 
 The cannonball/projectile will stop 0.05 units above the water.
@@ -232,7 +232,7 @@ The lab calculates:
 
 ---
 
-######Lab #9: (#lab-9) Linear Projectile Collision
+###Lab 9: Linear Projectile Collision
 _Lab 9_ simulates the projectile being launched linearly into a moving target. The target is always in-front of the boat and either moves towards the boat or away from the boat.
 
 Detects moment of impact and calculates the velocity of both the projectile and the target, preserving momentum.
@@ -266,7 +266,7 @@ The lab calculates:
 
 ---
 
-######Lab #10: (#lab-10) Angular Projectile Collision
+###Lab 10: Angular Projectile Collision
 _Lab 10_ simulates the projectile being launched  into a moving target, reacting at an angle.
 
 Detects moment of impact and calculates the velocity of both the projectile and the target, as well as the angle in which it will travel all while preserving momentum.
@@ -300,7 +300,7 @@ The lab calculates:
 **After Collision:**
 ![(Lab 10 Screenshot)](Images/lab10a.png)
 
-######Lab #11: (#lab-11) Projectile Collision with Rotations
+###Lab 11: Projectile Collision with Rotations
 _Lab 11_ simulates two cube-shaped projectiles being fired into one another. Both objects collide with a flat side, causing them to spin.
 
 Detects moment of impact and calculates the velocity of both the projectile and the target, the angle in which it will travel, speed of the spin after colliding and momentum preservation.
@@ -337,7 +337,7 @@ The lab calculates:
 
 ---
 
-######Final Lab: (#final-lab) Open World Physics
+###Final Lab: Open World Physics
 The _Final Lab_ gives the user complete control of the boat, allowing the user to pilot the boat around the game world.
 
 The boat will accelerate until it reaches its terminal velocity and decelerate using drag forces as well as steer using a rudder-style control scheme. There are no objects to collide with.
