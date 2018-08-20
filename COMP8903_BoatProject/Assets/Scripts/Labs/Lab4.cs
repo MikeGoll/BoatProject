@@ -5,12 +5,19 @@ using UnityEngine.UI;
 
 public class Lab4 : MonoBehaviour {
 
-	public GameObject boat, target, gunball, flightMarker;
+	[Header("Editable Attributes")]
 	public float gunBallVelocity;
-	public float range, xDifference, gamma, gammaDegrees;
+	
+	[Header("Calculated Attributes")]
+	public float range;
+	public float xDifference, gamma, gammaDegrees;
 	public float angle, angleAdjusted;
 	public float newDx, newDy, newDz, newVx, newVy, newVz;
 	public float currentDx, currentDy, oldDz, oldVx, oldVy, oldVz;
+
+	[Header("Object References")]
+	public GameObject boat;
+	public GameObject target, gunball, flightMarker;
 	public Text updatesText, timeText, gammaText, angleText;
 
 	private bool moving, initial;

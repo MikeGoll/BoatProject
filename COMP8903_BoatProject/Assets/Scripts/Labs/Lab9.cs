@@ -6,25 +6,29 @@ using UnityEngine.UI;
 public class Lab9 : MonoBehaviour {
 
 	//---------------- Lab #9 Additions ----------------
-	[Header("Target Attributes")]
+	[Header("Editable Attributes")]
 	public float targetMass;
-	public float targetVelocity;
-	[Header("Gunball Attributes")]
 	public float projMass;
 	public float gunBallVelocity;
-	public float gunBallVelocityFinal;
-
-	[Space(10)]
 	[Tooltip("Restitution coefficient - determines if the objects stick together or bounce upon impact.")]
 	public float e;
+	[Header("Lab 8 Attributes - Editable")]
+	public float dragCoefficient;
+
+	[Header("Calculated Attributes")]
+	
+	
+	public float gunBallVelocityFinal;
+	public float targetVelocity;
+
+	[Space(10)]
+
 	public float jImpulse;
 	public Vector3 momentumInitial;
 	public Vector3 momentumFinal;
 
 
 	//---------------- Lab #8 Additions ----------------
-	[Header("Lab 8 Attributes - Editable")]
-	public float dragCoefficient;
 	
 	[Header("Lab 8 Attributes")]
 	public float tau;
@@ -156,14 +160,6 @@ public class Lab9 : MonoBehaviour {
 			}
 
 			angle = PhysicsCalculator.calculateTheta(range, gunBallVelocity) * 180 / Mathf.PI;
-		
-			// newVx = PhysicsCalculator.calculateXVelocityWithWind(fixedTime, tau, oldVx, windCoefficient, windVelocity, gamma, dragCoefficient);
-			// newVy = PhysicsCalculator.calculateYVelocityWithWind(dragCoefficient, fixedTime, projMass, oldVy);
-			// newVz = PhysicsCalculator.calculateZVelocityWithWind(fixedTime, tau, oldVz, windCoefficient, windVelocity, gamma, dragCoefficient);
-
-			// newDx = PhysicsCalculator.calculateXPositionWithWind(currentDx, oldVx, tau, fixedTime, windCoefficient, windVelocity, dragCoefficient, gamma);
-			// newDy = PhysicsCalculator.calculateYPositionWithWind(currentDy, oldVy, tau, fixedTime);
-			// newDz = PhysicsCalculator.calculateZPositionWithWind(oldDz, oldVz, tau, fixedTime, windVelocity, gamma, windCoefficient, dragCoefficient);
 
 			//run lab 4
 			newVx = PhysicsCalculator.calculateVelocity(oldVx, 0, fixedTime);

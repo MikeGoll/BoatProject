@@ -504,13 +504,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec2c388953d4c4a2597c56beca8b30dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numUpdates: 0
-  distance: 16
-  velocity: 11
-  acceleration: 2
-  dragConstant: 0
-  time: 0
   useDrag: 0
+  velocity: 12
+  acceleration: -4
+  time: 2
+  numUpdates: 0
+  distance: 0
+  dragConstant: 0
   boat: {fileID: 1121528866}
   timeText: {fileID: 362369950}
   frameText: {fileID: 1802295252}

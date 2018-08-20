@@ -24,7 +24,7 @@ public class CanvasController : MonoBehaviour {
 	//GameObject reference to the DataController object. Used to grab a reference to the DataController class.
 	public GameObject dco;
 	//DataController class reference. Used to obtain values to display.
-	private DataController dc;
+	private Lab1 dc;
 	//Float array of calculated values to display to the user.
 	private float[] values;
 	//boolean flag to represent whether or not the "COM" section is displayed and change the UI accordingly.
@@ -45,7 +45,7 @@ public class CanvasController : MonoBehaviour {
 ----------------------------------------------------------------------------------------------------------------------*/
 	void Start () {
 		textTitle.text = "Hull";
-		dc = dco.GetComponent<DataController>();
+		dc = dco.GetComponent<Lab1>();
 		values = dc.getBoatFloats();
 	}
 	

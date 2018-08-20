@@ -5,18 +5,22 @@ using UnityEngine.UI;
 
 public class Lab2 : MonoBehaviour {
 
-	public int numUpdates;
-
-	public float distance, velocity, acceleration, dragConstant, time;
+	[Header("Editable Attributes")]
 	public bool useDrag;
+	public float velocity;
+	public float acceleration, time;
+	
+	[Header("Calculated Attributes")]
+	public int numUpdates;
+	public float distance, dragConstant;
 
 	private bool moving;
 
 	private float totalTime, t;
 	private float newD, currentD, newV, oldV, dt;
 
+	[Header("Game Objects and Text")]
 	public GameObject boat;
-
 	public Text timeText, frameText, velocityText, distanceText;
 
 	// Use this for initialization

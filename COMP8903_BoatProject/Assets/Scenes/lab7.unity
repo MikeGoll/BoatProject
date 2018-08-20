@@ -524,9 +524,9 @@ MonoBehaviour:
   tau: 0
   vMax: 0
   accelerationWithDrag: 0
-  angularForce: 0
-  angle: 0
-  force: 5000
+  angularForce: 100
+  angle: 270
+  force: 50000
   thrust: {x: 0, y: 0, z: 0}
   thrustAngle: {x: 0, y: 0, z: 0}
   rLeft: {x: 0, y: 0, z: 0}

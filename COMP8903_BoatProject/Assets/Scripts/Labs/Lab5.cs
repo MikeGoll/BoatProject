@@ -6,10 +6,20 @@ using UnityEngine.UI;
 public class Lab5 : MonoBehaviour {
 
 	// Use this for initialization
-	public GameObject boat, target, gunball, flightMarker;
+	
+	[Header("Editable Attributes")]
 	public float gunBallVelocity;
-	public float omegaI, omegaF, alphaI, theta, angularDisplacement, totalAngleDisplacement;
+	public float omegaI;
+	public float alphaI;
+
+	[Header("Calculated Attributes")]
+	public float omegaF;
+	public float theta, angularDisplacement, totalAngleDisplacement;
 	public float range, xDifference;
+
+	[Header("Object References")]
+	public GameObject boat;
+	public GameObject target, gunball, flightMarker;
 	public Text updatesText, timeText, gammaText, angleText;
 
 	private bool moving, initial;

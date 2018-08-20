@@ -308,13 +308,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 296440304}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 18, y: 4, z: 0}
+  m_LocalRotation: {x: 0, y: -0.5735764, z: 0, w: 0.8191521}
+  m_LocalPosition: {x: 15, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -70, z: 0}
 --- !u!1 &451402149
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,20 +747,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 044a4e14a8d824899b691c92118fdbd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boat: {fileID: 101403818}
-  target: {fileID: 1237586926}
-  gunball: {fileID: 1580790546906972, guid: 4205eaa6e56f046ea9f5f739b106d966, type: 2}
-  flightMarker: {fileID: 1139943970362762, guid: 73ee869c467484f689dd6abde92ef554,
-    type: 2}
   gunBallVelocity: 20
-  omegaI: 15
+  omegaI: 10
+  alphaI: 1
   omegaF: 0
-  alphaI: 2
   theta: 0
   angularDisplacement: 0
   totalAngleDisplacement: 0
   range: 0
   xDifference: 0
+  boat: {fileID: 101403818}
+  target: {fileID: 1237586926}
+  gunball: {fileID: 1580790546906972, guid: 4205eaa6e56f046ea9f5f739b106d966, type: 2}
+  flightMarker: {fileID: 1139943970362762, guid: 73ee869c467484f689dd6abde92ef554,
+    type: 2}
   updatesText: {fileID: 493429324}
   timeText: {fileID: 963116596}
   gammaText: {fileID: 593716272}

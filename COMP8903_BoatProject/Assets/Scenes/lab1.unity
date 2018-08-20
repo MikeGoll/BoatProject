@@ -387,8 +387,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 561178905}
-  - component: {fileID: 561178906}
   - component: {fileID: 561178904}
+  - component: {fileID: 561178906}
   m_Layer: 0
   m_Name: PhysicsSystem
   m_TagString: Untagged

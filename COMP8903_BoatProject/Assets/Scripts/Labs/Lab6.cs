@@ -8,22 +8,52 @@ public class Lab6 : MonoBehaviour {
 	//---------------------- LAB #6 Additions ----------------------
 	public GameObject totalBoat;
 
+	[Header("Editable Attributes")]
 	//User entered data through UI (force, angle of force, final displacement z, left angular displacement, right angular displacement)
-	public float force, angularForce, angle, dinZ, lD, rD;
+	public float force;
+	public float angularForce;
+	public float angle;
+	public float dinZ;
+	public float lD;
+	public float rD;
 
+	[Header("Calculated Attributes")]
+	
 	//thrust in X and Z axis
-	public Vector3 thrust, thrustAngle;
+	public Vector3 thrust;
+	public Vector3 thrustAngle;
 	public Vector3 rLeft, rRight, torqueL, torqueR;
 	public Vector3 acceleration;
 
-	public float accelerationL, accelerationR;
+	[Space(10)]
+
+	public float accelerationL;
+	public float accelerationR;
+
+	[Space(10)]
 
 	//acceleration, initial velocity, final velocity, new intermediate velocity, old intermediate velocity
-	public float v_initial, v_final, newVx, oldVx, newVz, oldVz;
+	public float v_initial;
+	public float  v_final;
+	public float  newVx;
+	public float  oldVx;
+	public float  newVz;
+	public float  oldVz;
+
+	[Space(10)]
 
 	//total distance, new and old distance
-	public float distance, newDx, oldDx, newDz, oldDz;
-	public Text timeText, posText, angDText;
+	public float distance;
+	public float  newDx;
+	public float  oldDx;
+	public float  newDz;
+	public float  oldDz;
+
+	[Space(10)]
+
+	public Text timeText;
+	public Text  posText;
+	public Text  angDText;
 	
 	private bool moving, initial, rotLeft, rotRight;
 	private float numUpdates;
@@ -32,9 +62,13 @@ public class Lab6 : MonoBehaviour {
 	private float distanceZ, distanceX;
 	private float temp1;
 
+	[Space(20)]
+
 	//---------------------- LAB #1 Originals ----------------------
 	//GameObject references for the boat, pilot and cannon
-	public GameObject b, p, c;
+	public GameObject b;
+	public GameObject p;
+	public GameObject c;
 	//masses of the objects
 	public float mass_boat, mass_pilot, mass_cannon, mass_com;
 	//moments of inertia of the objects

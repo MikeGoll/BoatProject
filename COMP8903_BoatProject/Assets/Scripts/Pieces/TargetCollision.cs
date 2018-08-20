@@ -14,15 +14,10 @@ public class TargetCollision : MonoBehaviour {
 		lab9 = GameObject.FindObjectOfType(typeof(Lab9)) as Lab9;
 		lab10 = GameObject.FindObjectOfType(typeof(Lab10)) as Lab10;
 
-		l9 = false;
-		l10 = true;
+		l9 = true;
+		l10 = false;
 
 		initial = true;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 
 	void OnTriggerEnter(Collider other)

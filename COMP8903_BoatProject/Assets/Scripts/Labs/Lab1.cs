@@ -14,7 +14,7 @@ using UnityEngine;
 -- NOTES:
 -- Controls the updating and distribution of data throughout the program.
 ----------------------------------------------------------------------------------------------------------------------*/
-public class DataController : MonoBehaviour {
+public class Lab1 : MonoBehaviour {
 
 	//GameObject references for the boat, pilot and cannon
 	public GameObject b, p, c;

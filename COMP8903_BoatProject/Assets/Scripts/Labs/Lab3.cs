@@ -3,14 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DataControllerLab3 : MonoBehaviour {
+public class Lab3 : MonoBehaviour {
 
 	
-	public GameObject boat, target, gunball, flightMarker;
+	[Header("Editable Attributes")]
 	public float gunBallVelocity;
+
+	[Header("Calculated Attributes")]
 	public float range;
 	public float angle;
 	public float newDx, newDy, currentDx, currentDy, newVx, newVy, oldVx, oldVy;
+
+	[Header("Object References")]
+	public GameObject boat;
+	public GameObject target, gunball, flightMarker;
 	public Text initialVelText, updatesText, timeText, rangeText, angleText, gunBallText;
 
 	private bool moving, initial;

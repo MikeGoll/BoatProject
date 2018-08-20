@@ -5,6 +5,18 @@ using UnityEngine.UI;
 
 public class Lab10: MonoBehaviour {
 
+	//---------------- User Data ----------------
+
+	[Header("Editable Attributes")]
+	public float targetMass;
+	public float targetVelocity;
+	public float projMass;
+	public float gunBallVelocity;
+	[Tooltip("Restitution coefficient - determines if the objects stick together or bounce upon impact.")]
+	public float e;
+	[Header("Lab 8 Attributes - Editable")]
+	public float dragCoefficient;
+
 	//---------------- Lab #10 Additions ----------------
 	public Vector3 normals, tangentials;
 	public float jNormal;
@@ -49,25 +61,15 @@ public class Lab10: MonoBehaviour {
 
 
 	//---------------- Lab #9 Additions ----------------
-	[Header("Target Attributes")]
-	public float targetMass;
-	public float targetVelocity;
-	[Header("Gunball Attributes")]
-	public float projMass;
-	public float gunBallVelocity;
 	public float gunBallVelocityFinal;
 
 	[Space(10)]
-	[Tooltip("Restitution coefficient - determines if the objects stick together or bounce upon impact.")]
-	public float e;
 	public float jImpulse;
 	public Vector3 momentumInitial;
 	public Vector3 momentumFinal;
 
 
 	//---------------- Lab #8 Additions ----------------
-	[Header("Lab 8 Attributes - Editable")]
-	public float dragCoefficient;
 	
 	[Header("Lab 8 Attributes")]
 	public float tau;

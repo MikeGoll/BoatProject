@@ -911,15 +911,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetMass: 2
-  targetVelocity: -10
   projMass: 1
-  gunBallVelocity: 15
-  gunBallVelocityFinal: 0
+  gunBallVelocity: 30
   e: 1
+  dragCoefficient: 1
+  gunBallVelocityFinal: 0
+  targetVelocity: -10
   jImpulse: 0
   momentumInitial: {x: 0, y: 0, z: 0}
   momentumFinal: {x: 0, y: 0, z: 0}
-  dragCoefficient: 1
   tau: 0
   windVelocity: 0
   windCoefficient: 0

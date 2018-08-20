@@ -237,18 +237,6 @@ public class Lab7 : MonoBehaviour {
 				moving = false;
 			}
 
-			// if (Mathf.Abs(dinZ) - distanceZ <= 0.05) {
-			// 	moving = false;
-			// }
-
-			// if (angularDisplacement >= rD && rotRight) {
-			// 	moving = false;
-			// }
-
-			// if (angularDisplacement >= lD && rotLeft) {
-			// 	moving = false;
-			// }
-
 			//calculate the new distances and velocities
 			newDx = PhysicsCalculator.calculateDistance(oldDx, acceleration.x, oldVx, fixedTime);
 			newVx = PhysicsCalculator.calculateVelocity(oldVx, acceleration.x, fixedTime);
@@ -268,12 +256,6 @@ public class Lab7 : MonoBehaviour {
 			angularVelocity = oldAngularVelocity + (temp1 * fixedTime);
 
 			angularDisplacement += Mathf.Abs(angularVelocity * fixedTime);
-
-			
-			// //update the position of the boat
-			// // totalBoat.transform.position = new Vector3(totalBoat.transform.position.x + newVx * fixedTime, totalBoat.transform.position.y, totalBoat.transform.position.z + newVz * fixedTime);
-			// totalBoat.transform.Translate(newVx * fixedTime, 0, newVz * fixedTime);
-			// totalBoat.transform.Rotate(0, temp, 0, Space.Self);
 
 			distanceX += newVx * fixedTime;
 			distanceZ += newVz * fixedTime;
