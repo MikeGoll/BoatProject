@@ -259,9 +259,11 @@ The lab calculates:
 | Space | Start/Stop/Resume Simulation |
 
 **At Collision:**
+
 ![(Lab 9 Screenshot)](Images/lab9b.png)
 
 **After Collision:**
+
 ![(Lab 9 Screenshot)](Images/lab9a.png)
 
 ---
@@ -295,9 +297,11 @@ The lab calculates:
 | Space | Start/Stop/Resume Simulation |
 
 **At Collision:**
+
 ![(Lab 10 Screenshot)](Images/lab10b.png)
 
 **After Collision:**
+
 ![(Lab 10 Screenshot)](Images/lab10a.png)
 
 ### Lab 11: Projectile Collision with Rotations
@@ -330,9 +334,11 @@ The lab calculates:
 | Space | Start/Stop/Resume Simulation |
 
 **At Collision:**
+
 ![(Lab 11 Screenshot)](Images/lab11b.png)
 
 **After Collision:**
+
 ![(Lab 11 Screenshot)](Images/lab11a.png)
 
 ---
