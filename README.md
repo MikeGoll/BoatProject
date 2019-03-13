@@ -2,9 +2,12 @@
 
 *By Michael Goll*
 
-###### Technology Used:
+##### Technology Used:
   - Language: **C#**
   - Engine: **Unity 2017**
+  
+##### Usage of Unity 2017
+Unity 2017 was used in order to render the simulation. It is also used to keep consistent time steps throughout all simulations and keep track of the world coordinates for objects. **All physics calculations are done manually and the results are applied to the world.**
 
 The purpose of the following project is to use physics calculations to accurately simulate the real-world environment. The following uses an example of a boat with 3 major components:
   - Hull
@@ -14,9 +17,6 @@ The purpose of the following project is to use physics calculations to accuratel
 Each component has its own unique characteristics such as weight, dimensions, and position within the world space.
 
 The project is broken up into 12 pieces--each presenting a different scenario.
-
-###### Usage of Unity 2017
-Unity 2017 was used in order to render the simulation. It is also used to keep consistent time steps throughout all simulations and keep track of the world coordinates for objects. **All physics calculations are done manually and the results are applied to the world.**
 
 ##### Labs
   - [Lab 1: Composite Object Calculations](#lab-1-composite-object-calculations)
